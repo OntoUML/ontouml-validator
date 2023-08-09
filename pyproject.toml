@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "ontouml-graph-validator"
+version = "1.0.0b0"
+description = "OntoUML Graph Validator"
+license = "Apache-2.0"
+authors = ["Pedro Paulo F. Barcelos <p.p.favatobarcelos@utwente.nl>"]
+readme = "README.md"
+homepage = "https://w3id.org/ontouml/graph-validator"
+repository = "https://w3id.org/ontouml/graph-validator"
+documentation = "https://w3id.org/ontouml/graph-validator/docs"
+keywords = ["semantic-web", "knowledge-graph", "ontouml", "ontology-driven-development", "ontouml-vocabulary", "ontouml-metamodel"]
+packages = [{ include = "ontouml-graph-validator" }]
+exclude = ["ontouml-graph-validator/tests"]
+
+[tool.poetry.urls]
+"PyPi Project" = "https://pypi.org/project/ontouml-graph-validator/"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
