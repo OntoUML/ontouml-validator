@@ -1,13 +1,9 @@
-import sys
-
-sys.path.append('./json2graph')
-
-from json2graph.modules.errors import report_error_io_read, report_error_io_write
+from validator.modules.errors import report_error_io_read, report_error_io_write
 import yaml
 import toml
 
 metadata_file_read = "pyproject.toml"
-metadata_file_write = "json2graph/resources/metadata.yaml"
+metadata_file_write = "validator/resources/metadata.yaml"
 
 # Loads pyproject.toml file into a dictionary
 try:
@@ -27,4 +23,4 @@ except IOError as error:
     file_description = "metadata file could not be saved into resource folder"
     report_error_io_write(metadata_file_write, file_description, error)
 
-print("Metadata file sucessfully created.")
+print("Metadata file successfully created.")

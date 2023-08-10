@@ -1,4 +1,5 @@
 """ Main module for validating OntoUML Graphs. """
+
 def validate():
 
     # set OWA or CWA
@@ -14,5 +15,5 @@ def validate():
     pass
 
 if __name__ == '__main__':
-    
+
     validate()
