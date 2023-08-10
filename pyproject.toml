@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ontouml-validator"
-version = "1.0.0b0"
+version = "1.0.0a0"
 description = "OntoUML Graph Validator"
 license = "Apache-2.0"
 authors = ["Pedro Paulo F. Barcelos <p.p.favatobarcelos@utwente.nl>"]

@@ -1,0 +1,28 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: OntoUML Validator
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Pedro Paulo
+    family-names: Favato Barcelos
+    email: p.p.favatobarcelos@utwente.nl
+    affiliation: University of Twente
+    orcid: 'https://orcid.org/0000-0003-2736-7817'
+identifiers:
+  - type: url
+    value: 'https://w3id.org/ontouml/validator'
+    description: Git repository
+repository-code: 'https://w3id.org/ontouml/validator'
+url: 'https://w3id.org/ontouml/validator/docs'
+repository-artifact: 'https://pypi.org/project/ontouml-validator/'
+abstract: Validate OntoUML Models
+keywords:
+  - ontouml
+  - ontology
+  - ontology-driven-conceptual-modeling
+license: Apache-2.0
