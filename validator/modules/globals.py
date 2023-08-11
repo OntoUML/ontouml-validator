@@ -21,8 +21,3 @@ except IOError as error:
     report_error_io_read(metadata_file, file_description, error)
 
 METADATA = metadata_dictionary["tool"]["poetry"]
-
-# GROUPS OF CONCEPTS
-
-ELEMENT_VIEW_TYPES = ["ClassView", "PackageView", "GeneralizationSetView", "RelationView", "GeneralizationView",
-                      "NoteView"]
