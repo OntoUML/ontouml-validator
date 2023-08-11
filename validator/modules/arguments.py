@@ -19,24 +19,6 @@ ARGUMENTS = {}
 LOGGER = initialize_logger()
 
 
-def validate_input_file(input_path: str):
-    """ Validate the input file format for RDFLib-compatible graph or JSON serialization.
-
-    :param input_path: Path to the input file to be validated.
-    :type input_path: str
-    """
-    # Formats for saving graphs supported by RDFLib
-    # https://rdflib.readthedocs.io/en/stable/intro_to_parsing.html#saving-rdf
-    allowed_graph_formats = ["turtle", "ttl", "turtle2", "xml", "pretty-xml", "json-ld", "ntriples", "nt", "nt11", "n3",
-                             "trig", "trix", "nquads"]
-
-    file_extension = (os.path.splitext(input_path)[1])[1:]
-
-    # Checking if provided input file type is valid
-    if (file_extension != "json") and (file_extension not in allowed_graph_formats):
-        report_error_requirement_not_met("Provided input file must be of a valid type. Execution finished.")
-
-
 def treat_user_arguments() -> dict:
     """ This function parses the command-line arguments provided by the user and performs necessary validations.
 
@@ -76,14 +58,12 @@ def treat_user_arguments() -> dict:
                             "silent": arguments.silent,
                             "assumption": arguments.assumption}
 
-    validate_input_file(arguments.input_path)
-
     LOGGER.debug(f"Arguments parsed. Obtained values are: {arguments_dictionary}.")
 
     return arguments_dictionary
 
 
-def initialize_arguments(input_path: str = "not_initialized",
+def initialize_arguments(input_path: str,
                          silent: bool = True,
                          assumption: str = "owa",
                          execution_mode: str = "import"):
@@ -96,7 +76,7 @@ def initialize_arguments(input_path: str = "not_initialized",
     - 'import': When imported into external code, working as a library.
     - 'test': Used for testing.
 
-    :param input_path: Path to the input file to be validated. (Optional)
+    :param input_path: Path to the input file to be validated.
     :type input_path: str
     :param silent: If True, suppresses intermediate communications and log messages during execution. (Optional)
     :type silent: bool
@@ -108,13 +88,13 @@ def initialize_arguments(input_path: str = "not_initialized",
     :type execution_mode: str
     """
 
+    global ARGUMENTS
+
     # Validating parameter execution_mode
     valid_execution_modes = ["script", "import", "test"]
     if execution_mode not in valid_execution_modes:
         current_function = inspect.stack()[0][3]
         report_error_invalid_parameter(execution_mode, valid_execution_modes, current_function)
-
-    global ARGUMENTS
 
     # Specific according to execution_mode
     if execution_mode == "script":
@@ -127,6 +107,5 @@ def initialize_arguments(input_path: str = "not_initialized",
 
     # General: input file details
     input_path = pathlib.Path(ARGUMENTS["input_path"])
-    ARGUMENTS["input_path"] = input_path.parent
     ARGUMENTS["input_name"] = input_path.stem
     ARGUMENTS["input_extension"] = input_path.suffix[1:]
