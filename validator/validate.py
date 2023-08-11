@@ -5,33 +5,16 @@ the correctness of OntoUML models. The module handles input validation, model lo
 supporting multiple execution modes.
 """
 
-import inspect
+import time
 
 import json2graph.library
 
 import modules.arguments as args
-from modules.errors import report_error_invalid_parameter, report_error_requirement_not_met
 from modules.utils_graph import load_graph_safely
-
-
-def validate_input_extension(input_extension: str):
-    """ Validate the input file format for RDFLib-compatible graph or JSON serialization.
-
-    This function validates the file extension of the input OntoUML model to ensure it is compatible with supported
-    formats. It checks against a predefined list of RDFLib's allowed graph and JSON formats and raises an error if the
-    provided input extension is invalid.
-
-    :param input_extension: Path to the input file to be validated.
-    :type input_extension: str
-    """
-    # Formats for saving graphs supported by RDFLib
-    # https://rdflib.readthedocs.io/en/stable/intro_to_parsing.html#saving-rdf
-    allowed_graph_formats = ["turtle", "ttl", "turtle2", "xml", "pretty-xml", "json-ld", "ntriples", "nt", "nt11", "n3",
-                             "trig", "trix", "nquads"]
-
-    # Checking if provided input file type is valid
-    if (input_extension != "json") and (input_extension not in allowed_graph_formats):
-        report_error_requirement_not_met("Provided input file must be of a valid type. Execution finished.")
+from validator.modules.globals import METADATA
+from validator.modules.logger import initialize_logger
+from validator.modules.utils_general import get_date_time
+from validator.modules.utils_validations import validate_input_extension, validate_execution_mode
 
 
 def validate_ontouml_model(input_path: str,
@@ -61,12 +44,11 @@ def validate_ontouml_model(input_path: str,
     :rtype: list[str]
     """
 
+    logger = initialize_logger(execution_mode)
+
     # Validating input file extension and parameter execution_mode
     validate_input_extension(args.ARGUMENTS['input_path'])
-    valid_execution_modes = ["script", "import", "test"]
-    if execution_mode not in valid_execution_modes:
-        current_function = inspect.stack()[0][3]
-        report_error_invalid_parameter(execution_mode, valid_execution_modes, current_function)
+    validate_execution_mode(execution_mode)
 
     # Initializing arguments if not initialized yet (in the cases when execution mode is 'import' or 'test')
     if execution_mode != "script":
@@ -77,6 +59,17 @@ def validate_ontouml_model(input_path: str,
 
     # From now on the ARGUMENTS is initialized and only the dictionary is used (not the received parameters)
 
+    if execution_mode == "script" and not args.ARGUMENTS["silent"]:
+        # Initial time information
+        time_screen_format = "%d-%m-%Y %H:%M:%S"
+        start_date_time = get_date_time(time_screen_format)
+        st = time.perf_counter()
+
+        logger.info(f"{METADATA['name']} v{METADATA['version']} started on {start_date_time}!")
+        logger.debug(f"Selected arguments are: {args.ARGUMENTS}")
+        logger.info(f"Starting the validation of the file {args.ARGUMENTS['input_path']} "
+                    f"considering {args.ARGUMENTS['assumption']}.\n")
+
     # Loading model to be validated
     if args.ARGUMENTS['input_extension'] == "json":
         model_graph = json2graph.library.decode_json_model(args.ARGUMENTS['input_path'])
@@ -86,7 +79,12 @@ def validate_ontouml_model(input_path: str,
 
     list_problems = run_validation(model_graph)
 
-    # TODO (@pedropaulofb): Add basic logging information!
+    if execution_mode == "script" and not args.ARGUMENTS["silent"]:
+        # Get software's execution conclusion time
+        end_date_time = get_date_time(time_screen_format)
+        et = time.perf_counter()
+        elapsed_time = round((et - st), 3)
+        logger.info(f"Validation concluded on {end_date_time}. Total execution time: {elapsed_time} seconds.")
 
     return list_problems
 
@@ -97,4 +95,4 @@ if __name__ == '__main__':
     """
 
     args.initialize_arguments(execution_mode="script")
-    validate_ontouml_model(execution_mode="script")
+    list_problems = validate_ontouml_model(execution_mode="script")

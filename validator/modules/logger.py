@@ -18,10 +18,11 @@ def logger_get_date_time() -> str:
     return date_time
 
 
-def initialize_logger(execution_mode: str = "production") -> logging.Logger:
+def initialize_logger(execution_mode: str = "import") -> logging.Logger:
     """ Create and initialize logger. The created logger is called 'execution-logger'.
     Different triggers are defined for each execution mode:
-        - production: INFO
+        - script: INFO
+        - import: ERROR
         - test: ERROR
 
     :param execution_mode: Information about execution mode. Valid values are 'production' and 'test'.
@@ -42,7 +43,7 @@ def initialize_logger(execution_mode: str = "production") -> logging.Logger:
         # Creating CONSOLE handlers
         console_handler = logging.StreamHandler()
 
-        if execution_mode == "production":
+        if execution_mode == "script":
             console_handler.setLevel(logging.INFO)
         else:
             console_handler.setLevel(logging.ERROR)
