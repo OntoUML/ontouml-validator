@@ -1,0 +1,6 @@
+test_CL001.ttl,owa,valid
+test_CL001.ttl,cwa,valid
+test_CL001A.ttl,owa,warning
+test_CL001A.ttl,cwa,error
+test_CL001B.ttl,owa,warning
+test_CL001B.ttl,cwa,error

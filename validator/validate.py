@@ -20,7 +20,7 @@ from validator.modules.utils_validations import validate_input_extension, valida
 def validate_ontouml_model(input_path: str,
                            silent: bool = True,
                            assumption: str = "owa",
-                           execution_mode: str = "import") -> list[str]:
+                           execution_mode: str = "import") -> tuple[list[str], list[str]]:
     """ This function performs validation of an OntoUML model. It validates the input parameters, initializes arguments
     based on the execution mode, loads the model graph, and runs the validation process. The function returns a list of
     problems identified in the validated model.
@@ -39,9 +39,10 @@ def validate_ontouml_model(input_path: str,
                            Valid values are 'import' (default), 'script', and 'test'.
     :type execution_mode: str
 
-    :return: List of strings representing all validations in which the model failed.
-             I.e., it is list of problems the validated model has.
-    :rtype: list[str]
+    :return: Tuple containing two lists, both potentially containing codes OntoUML rules' codes. The lists are:
+            [0] codes of rules that the model do not comply with and that generated an ERROR.
+            [1] codes of rules that the model do not comply with and that generated a WARNING.
+    :rtype: tuple[list[str],list[str]]
     """
 
     logger = initialize_logger(execution_mode)
@@ -77,7 +78,7 @@ def validate_ontouml_model(input_path: str,
         model_graph = load_graph_safely(ontology_file=args.ARGUMENTS['input_path'],
                                         format=args.ARGUMENTS['input_extension'])
 
-    list_problems = run_validation(model_graph)
+    list_errors, list_warnings = run_validation(model_graph)
 
     if execution_mode == "script" and not args.ARGUMENTS["silent"]:
         # Get software's execution conclusion time
@@ -86,7 +87,7 @@ def validate_ontouml_model(input_path: str,
         elapsed_time = round((et - st), 3)
         logger.info(f"Validation concluded on {end_date_time}. Total execution time: {elapsed_time} seconds.")
 
-    return list_problems
+    return list_errors, list_warnings
 
 
 if __name__ == '__main__':
