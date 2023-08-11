@@ -10,7 +10,7 @@ global METADATA
 
 # Guarantees that the file will be found as it searches using this file as basis
 package_dir = os.path.dirname(os.path.dirname(__file__))
-metadata_file = os.path.join(package_dir, "resources\metadata.yaml")
+metadata_file = os.path.join(package_dir, "resources" + os.path.sep + "metadata.yaml")
 
 # Loads metadata_file into a dictionary
 try:
@@ -20,7 +20,7 @@ except IOError as error:
     file_description = "Metadata file could not be loaded."
     report_error_io_read(metadata_file, file_description, error)
 
-METADATA = metadata_dictionary["tool"]["poetry"] | metadata_dictionary["extras"]
+METADATA = metadata_dictionary["tool"]["poetry"]
 
 # GROUPS OF CONCEPTS
 

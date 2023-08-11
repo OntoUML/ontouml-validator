@@ -1,12 +1,12 @@
 """ Argument Treatments Module.
 
-This module provides functions for parsing and validating user-provided arguments when starting the software execution
-as a script.
+This module provides functions for parsing and validating (user-provided or default) arguments when starting the
+software in different execution modes (as a script, as library, or for testing). It offers capabilities for handling
+command-line arguments and for initializing the global variable ARGUMENTS containing the arguments.
 """
 
 import argparse
-
-import validators
+import os
 
 from .errors import report_error_requirement_not_met
 from .globals import METADATA
@@ -17,17 +17,30 @@ ARGUMENTS = {}
 LOGGER = initialize_logger()
 
 
-def treat_user_arguments() -> dict:
-    """ This function parses the command-line arguments provided by the user and performs necessary validations.
+def validate_input_file(input_path: str):
+    """ Validate the input file format for RDFLib-compatible graph or JSON serialization.
 
-    :return: Dictionary with json path (key 'json_path') and final file format (key 'format').
-    :rtype: dict
+    :param input_path: Path to the input file to be validated.
+    :type input_path: str
     """
-
     # Formats for saving graphs supported by RDFLib
     # https://rdflib.readthedocs.io/en/stable/intro_to_parsing.html#saving-rdf
     allowed_graph_formats = ["turtle", "ttl", "turtle2", "xml", "pretty-xml", "json-ld", "ntriples", "nt", "nt11", "n3",
                              "trig", "trix", "nquads"]
+
+    file_extension = (os.path.splitext(input_path)[1])[1:]
+
+    # Checking if provided input file type is valid
+    if (file_extension != "json") and (file_extension not in allowed_graph_formats):
+        report_error_requirement_not_met("Provided input file must be of a valid type. Execution finished.")
+
+
+def treat_user_arguments() -> dict:
+    """ This function parses the command-line arguments provided by the user and performs necessary validations.
+
+    :return: Dictionary with arguments provided by the user or default values.
+    :rtype: dict
+    """
 
     LOGGER.debug("Parsing user's arguments...")
 
@@ -41,22 +54,14 @@ def treat_user_arguments() -> dict:
     args_parser.version = about_message
 
     # POSITIONAL ARGUMENT
-    args_parser.add_argument("json_path", type=str, action="store",
-                             help="The path of the JSON file to be encoded.")
+    args_parser.add_argument("input_path", type=str, action="store",
+                             help="The path of the graph or json input file to be validated.")
 
     # OPTIONAL ARGUMENT
-    args_parser.add_argument("-f", "--format", action="store", choices=allowed_graph_formats, default="ttl",
-                             help="Format to save the decoded file. Default is 'ttl'.")
-    args_parser.add_argument("-l", "--language", action="store", type=str, default="",
-                             help="Language tag for the ontology's concepts. Default is 'None'.")
-    args_parser.add_argument("-c", "--correct", action="store_true",
-                             help="Enables syntactical and semantic validations and corrections.")
     args_parser.add_argument("-s", "--silent", action="store_true",
-                             help="Silent mode. Does not present validation warnings and errors.")
-    args_parser.add_argument("-u", "--base_uri", action="store", type=str, default="https://example.org#",
-                             help="Base URI of the resulting graph. Default is 'https://example.org#'.")
-    args_parser.add_argument("-m", "--model_only", action="store_true",
-                             help="Keep only model elements, eliminating all diagrammatic data from output.")
+                             help="Silent mode. Do not print warnings and errors on screen.")
+    args_parser.add_argument("-a", "--assumption", action="store", choices=["owa", "cwa"], default="owa",
+                             help="Format to save the decoded file. Default is 'ttl'.")
 
     # AUTOMATIC ARGUMENTS
     args_parser.add_argument("-v", "--version", action="version", help="Print the software version and exit.")
@@ -65,36 +70,20 @@ def treat_user_arguments() -> dict:
     arguments = args_parser.parse_args()
 
     # Asserting dictionary keys
-    arguments_dictionary = {"format": arguments.format,
-                            "language": arguments.language,
-                            "correct": arguments.correct,
+    arguments_dictionary = {"input_path": arguments.input_path,
                             "silent": arguments.silent,
-                            "json_path": arguments.json_path,
-                            "base_uri": arguments.base_uri,
-                            "model_only": arguments.model_only}
+                            "assumption": arguments.assumption}
 
-    # Checking if provided input file type is valid
-    if ".json" not in arguments.json_path:
-        report_error_requirement_not_met("Provided input file must be of JSON type. Execution finished.")
-
-    # Checking if provided URI is valid. I.e., if it has '/' or '#' at the end. If it does not, add a '#'
-    if not validators.url(arguments.base_uri):
-        report_error_requirement_not_met("Provided base URI is invalid. Execution finished.")
-    elif (arguments.base_uri[-1] != '#') and (arguments.base_uri[-1] != '/'):
-        arguments_dictionary["base_uri"] += '#'
+    validate_input_file(arguments.input_path)
 
     LOGGER.debug(f"Arguments parsed. Obtained values are: {arguments_dictionary}.")
 
     return arguments_dictionary
 
 
-def initialize_arguments(json_path: str="not_initialized",
-                         base_uri: str = "https://example.org#",
-                         graph_format: str = "ttl",
-                         language: str = "",
-                         model_only: bool = False,
+def initialize_arguments(input_path: str = "not_initialized",
                          silent: bool = True,
-                         correct: bool = False,
+                         assumption: str = "owa",
                          execution_mode: str = "import"):
     """ This function initializes the global variable ARGUMENTS of type dictionary, which contains user-provided
     (when executed in script mode) or default arguments (when executed as a library or for testing).
@@ -105,25 +94,15 @@ def initialize_arguments(json_path: str="not_initialized",
     - 'package': When imported into external code, working as a library package.
     - 'test': Used for testing.
 
-
-    :param json_path: Path to the JSON file to be decoded provided by the user. (Optional)
-    :type json_path: str
-    :param base_uri: Base URI to be used for generating URIs for ontology concepts.
-    Default is "https://example.org#". (Optional)
-    :type base_uri: str
-    :param graph_format: Format for saving the resulting knowledge graph.
-    Default value is 'ttl' (Turtle syntax). (Optional)
-    :type graph_format: str
-    :param language: Language tag to be added to the ontology's concepts. (Optional)
-    :type language: str
-    :param model_only: If True, only the OntoUML model will be extracted without diagrammatic information. (Optional)
-    :type model_only: bool
+    :param input_path: Path to the input file to be validated. (Optional)
+    :type input_path: str
     :param silent: If True, suppresses intermediate communications and log messages during execution. (Optional)
     :type silent: bool
-    :param correct: If True, attempts to correct potential errors during the conversion process. (Optional)
-    :type correct: bool
-    :param execution_mode: Information about the execution mode.
-    Valid values are 'import' (default), 'script', and 'test'. (Optional)
+    :param assumption: World assumption to be considered during the validation execution. (Optional)
+                       Valid values are 'owa' (default) and 'cwa'.
+    :type assumption: str
+    :param execution_mode: Information about the execution mode. (Optional)
+                           Valid values are 'import' (default), 'script', and 'test'.
     :type execution_mode: str
     """
 
@@ -131,14 +110,9 @@ def initialize_arguments(json_path: str="not_initialized",
 
     if execution_mode == "script":
         ARGUMENTS = treat_user_arguments()
+        ARGUMENTS["execution_mode"] = execution_mode
     else:
-        ARGUMENTS["base_uri"] = base_uri
-        ARGUMENTS["correct"] = correct
-        ARGUMENTS["format"] = graph_format
-        ARGUMENTS["json_path"] = json_path
-        ARGUMENTS["language"] = language
-        ARGUMENTS["model_only"] = model_only
+        ARGUMENTS["input_path"] = input_path
         ARGUMENTS["silent"] = silent
-
-    if execution_mode == "test":
-        ARGUMENTS["correct"] = True
+        ARGUMENTS["assumption"] = assumption
+        ARGUMENTS["execution_mode"] = execution_mode

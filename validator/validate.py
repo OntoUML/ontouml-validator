@@ -1,4 +1,6 @@
 """ Main module for validating OntoUML Graphs. """
+from modules.arguments import treat_user_arguments
+
 
 def validate():
 
@@ -15,5 +17,5 @@ def validate():
     pass
 
 if __name__ == '__main__':
-
+    treat_user_arguments()
     validate()
