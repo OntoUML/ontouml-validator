@@ -86,6 +86,8 @@ def validate_ontouml_model(input_path: str,
 
     list_problems = run_validation(model_graph)
 
+    # TODO (@pedropaulofb): Add basic logging information!
+
     return list_problems
 
 
