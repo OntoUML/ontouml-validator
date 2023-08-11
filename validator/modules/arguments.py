@@ -6,9 +6,11 @@ command-line arguments and for initializing the global variable ARGUMENTS contai
 """
 
 import argparse
+import inspect
 import os
+import pathlib
 
-from .errors import report_error_requirement_not_met
+from .errors import report_error_requirement_not_met, report_error_invalid_parameter
 from .globals import METADATA
 from .logger import initialize_logger
 
@@ -91,7 +93,7 @@ def initialize_arguments(input_path: str = "not_initialized",
 
     The valid execution modes are:
     - 'script': If used as a script, use user's arguments parsed from the command line.
-    - 'package': When imported into external code, working as a library package.
+    - 'import': When imported into external code, working as a library.
     - 'test': Used for testing.
 
     :param input_path: Path to the input file to be validated. (Optional)
@@ -106,13 +108,25 @@ def initialize_arguments(input_path: str = "not_initialized",
     :type execution_mode: str
     """
 
+    # Validating parameter execution_mode
+    valid_execution_modes = ["script", "import", "test"]
+    if execution_mode not in valid_execution_modes:
+        current_function = inspect.stack()[0][3]
+        report_error_invalid_parameter(execution_mode, valid_execution_modes, current_function)
+
     global ARGUMENTS
 
+    # Specific according to execution_mode
     if execution_mode == "script":
         ARGUMENTS = treat_user_arguments()
-        ARGUMENTS["execution_mode"] = execution_mode
     else:
         ARGUMENTS["input_path"] = input_path
         ARGUMENTS["silent"] = silent
         ARGUMENTS["assumption"] = assumption
         ARGUMENTS["execution_mode"] = execution_mode
+
+    # General: input file details
+    input_path = pathlib.Path(ARGUMENTS["input_path"])
+    ARGUMENTS["input_path"] = input_path.parent
+    ARGUMENTS["input_name"] = input_path.stem
+    ARGUMENTS["input_extension"] = input_path.suffix[1:]
