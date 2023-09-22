@@ -1,10 +1,9 @@
 """Util functions related to graphs."""
-
 from rdflib import Graph
 
 from .errors import report_error_io_read
 from .utils_validations import validate_input_extension
-from .. import logger
+from loguru import logger
 
 
 def load_graph_safely(ontology_file: str, file_format: str = "not_provided") -> Graph:
@@ -20,13 +19,12 @@ def load_graph_safely(ontology_file: str, file_format: str = "not_provided") -> 
     """
     ontology_graph = Graph()
 
-    file_format = file_format.lower().strip()
-    validate_input_extension(file_format)
-
     try:
         if file_format == "not_provided":
             ontology_graph.parse(ontology_file, encoding="utf-8")
         else:
+            file_format = file_format.lower().strip()
+            validate_input_extension(file_format)
             ontology_graph.parse(ontology_file, encoding="utf-8", format=file_format)
     except OSError as error:
         file_description = "input ontology file"

@@ -1,8 +1,9 @@
 from rdflib import Graph
 
+from loguru import logger
 from .modules.utils_graph import load_graph_safely
 from .modules.utils_validations import validate_assumption
-from .validation_rules.execute_rules import execute_all_validation_rules
+from .validations.execute_rules import execute_all_validation_rules
 
 
 def validate_ontouml_file(ontouml_file_path: str, world_assumption: str) -> tuple[bool, list[str], list[str]]:
@@ -28,7 +29,7 @@ def validate_ontouml_file(ontouml_file_path: str, world_assumption: str) -> tupl
 
 
 def validate_ontouml_model(ontouml_model: Graph, world_assumption: str) -> tuple[bool, list[str], list[str]]:
-    """
+    """Validate an ontouml model loaded as a graph checking its compliance to all OntoUML rules.
 
     :param ontouml_model: The OntoUML model in graph format (using the ontouml-vocabulary) to be validated.
     :type ontouml_model: Graph
@@ -50,6 +51,9 @@ def validate_ontouml_model(ontouml_model: Graph, world_assumption: str) -> tuple
     if assumption == "cwa":
         e_list.append(w_list)
         w_list = []
+
+    logger.info(f"Final w_list: {w_list}")
+    logger.info(f"Final e_list: {e_list}")
 
     is_valid = True if not e_list else False
 

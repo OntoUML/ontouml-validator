@@ -6,9 +6,6 @@ import csv
 import os
 
 import pytest
-from icecream import ic
-
-from validator import logger
 
 
 def get_test_list() -> list[tuple[str, str, str]]:
@@ -37,8 +34,6 @@ def get_test_list() -> list[tuple[str, str, str]]:
         for row in csv_reader:
             single_test = tuple(row.values())
             tests_information.append(single_test)
-
-    ic(tests_information)
 
     return tests_information
 

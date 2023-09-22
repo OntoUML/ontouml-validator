@@ -4,7 +4,7 @@ software's execution.
 These functions are designed to improve the robustness and reliability of the program by providing clear error messages
 and raising appropriate exceptions when necessary.
 """
-from validator import logger
+from loguru import logger
 
 
 def report_error_requirement_not_met(error_message: str) -> None:

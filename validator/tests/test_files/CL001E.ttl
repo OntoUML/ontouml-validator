@@ -41,7 +41,8 @@
     ontouml:order "1"^^xsd:nonNegativeInteger ;
     ontouml:project :SdSX3VGEEWUYYQWe ;
     ontouml:restrictedTo ontouml:functionalComplexNature ;
-    ontouml:stereotype ontouml:kind .
+    # Manually modified as two stereotypes for a same class is not supported in the current version of the JSON exportation
+    ontouml:stereotype ontouml:kind , ontouml:category .
 
 :SdSX3VGEEWUYYQWe_root a ontouml:Package ;
     ontouml:containsModelElement :Cr733VGEEWUYYQoI ;

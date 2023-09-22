@@ -1,9 +1,11 @@
 import inspect
 
+from icecream import ic
+from loguru import logger
 from rdflib import Graph
 
-from validator import logger
-from validator.modules.errors import report_error_end_of_switch
+from .sparql_queries import QUERY_CL001
+from ..modules.errors import report_error_end_of_switch
 
 
 def execute_rule_CL001(ontouml_model: Graph) -> tuple[list[str], list[str]]:
@@ -18,6 +20,13 @@ def execute_rule_CL001(ontouml_model: Graph) -> tuple[list[str], list[str]]:
     """
 
     rule_description = "Every class must be decorated with exactly one stereotype."
+
+    query_answer = ontouml_model.query(QUERY_CL001)
+
+    for row in query_answer:
+        class_name = row.class_name.value
+        class_sts = row.num_sts.value
+        ic(class_name, class_sts)
 
     rule_w_list = []
     rule_e_list = []

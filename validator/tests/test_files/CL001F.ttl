@@ -45,7 +45,8 @@
     ontouml:name "TestClass" ;
     ontouml:order "1"^^xsd:nonNegativeInteger ;
     ontouml:project :SdSX3VGEEWUYYQWe ;
-    ontouml:stereotype ontouml:Agent .
+    # Manually modified as two stereotypes for a same class is not supported in the current version of the JSON exportation
+    ontouml:stereotype ontouml:Agent, ontouml:Capability .
 
 :SdSX3VGEEWUYYQWe a ontouml:Project ;
     ontouml:diagram :IQKX3VGEEWUYYQl5 ;

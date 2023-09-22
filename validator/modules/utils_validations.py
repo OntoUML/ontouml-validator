@@ -1,6 +1,6 @@
 import inspect
 
-from validator.modules.errors import report_error_invalid_parameter, report_error_requirement_not_met
+from ..modules.errors import report_error_invalid_parameter, report_error_requirement_not_met
 
 
 def validate_input_extension(input_extension: str):
@@ -45,13 +45,12 @@ def validate_assumption(world_assumption: str) -> str:
 
     :param world_assumption: The world assumption to be validated and normalized.
     :type world_assumption: str
-
     :return: The validated and normalized world assumption ("owa" or "cwa").
     :rtype: str
     """
     assumption = world_assumption.lower().strip()
 
-    if (assumption != "owa") or (assumption != "cwa"):
+    if assumption not in ["owa", "cwa"]:
         current_function = inspect.stack()[0][3]
         report_error_invalid_parameter("world_assumption", ["cwa", "owa"], current_function)
 
