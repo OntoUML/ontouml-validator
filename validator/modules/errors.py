@@ -4,9 +4,7 @@ software's execution.
 These functions are designed to improve the robustness and reliability of the program by providing clear error messages
 and raising appropriate exceptions when necessary.
 """
-from .logger import initialize_logger
-
-LOGGER = initialize_logger()
+from validator import logger
 
 
 def report_error_requirement_not_met(error_message: str) -> None:
@@ -18,7 +16,7 @@ def report_error_requirement_not_met(error_message: str) -> None:
 
     :raises ValueError: Always.
     """
-    LOGGER.error(f"{error_message} Program aborted.")
+    logger.error(f"{error_message} Program aborted.")
     raise ValueError("Software's requirement not met!")
 
 
@@ -40,7 +38,7 @@ def report_error_invalid_parameter(
 
     :raises ValueError: Always.
     """
-    LOGGER.error(
+    logger.error(
         f"Value {invalid_parameter} received as parameter in function {caller_function_name} is invalid. "
         f"Valid values for this parameter are: {list_valid_parameters}. Program aborted."
     )
@@ -60,7 +58,7 @@ def report_error_end_of_switch(invalid_parameter: str, caller_function_name: str
 
     :raises ValueError: Always.
     """
-    LOGGER.error(
+    logger.error(
         f"Unexpected parameter {invalid_parameter} received in function {caller_function_name}. Program aborted."
     )
     raise ValueError("End of switch (if-else statements) without valid parameter!")
@@ -78,7 +76,7 @@ def report_error_io_read(desired_content: str, file_description: str, error: OSE
 
     :raises OSError: Always.
     """
-    LOGGER.error(f"Could not load or read the {file_description} {desired_content}. Program aborted.")
+    logger.error(f"Could not load or read the {file_description} {desired_content}. Program aborted.")
     raise OSError(error)
 
 
@@ -94,5 +92,5 @@ def report_error_io_write(desired_content: str, file_description: str, error: OS
 
     :raises OSError: Always.
     """
-    LOGGER.error(f"Could not create, write, or save the {file_description} {desired_content}. Program aborted.")
+    logger.error(f"Could not create, write, or save the {file_description} {desired_content}. Program aborted.")
     raise OSError(error)

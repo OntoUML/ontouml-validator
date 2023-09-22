@@ -4,6 +4,8 @@ This module serves as the main component for validating OntoUML Graphs, providin
 the correctness of OntoUML models. The module handles input validation, model loading, and execution flow control,
 supporting multiple execution modes.
 """
+from rdflib import Graph
+
 from validator.library import validate_ontouml_model
 
 if __name__ == "__main__":
@@ -11,4 +13,5 @@ if __name__ == "__main__":
     execution and calls the validate_ontouml_model function in script mode.
     """
 
-    validate_ontouml_model()
+    ontouml_model = Graph()
+    validate_ontouml_model(ontouml_model, "owa")

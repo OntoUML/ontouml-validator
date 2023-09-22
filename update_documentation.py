@@ -9,9 +9,7 @@ import os
 import shutil
 import subprocess
 
-from json2graph.modules.logger import initialize_logger
-
-LOGGER = initialize_logger()
+from validator import logger
 
 
 def execute_documentation_commands() -> None:
@@ -40,44 +38,44 @@ def execute_documentation_commands() -> None:
         # Use shutil.rmtree to remove the directory and its contents
         if os.path.exists(docs_dir):
             shutil.rmtree(docs_dir)
-            LOGGER.info(f"Directory '{docs_dir}' and its contents have been successfully removed.")
+            logger.info(f"Directory '{docs_dir}' and its contents have been successfully removed.")
         os.makedirs(docs_dir, exist_ok=True)
-        LOGGER.info(f"Empty directory '{docs_dir}' has been successfully created.")
+        logger.info(f"Empty directory '{docs_dir}' has been successfully created.")
     except OSError as e:
-        LOGGER.error(f"Error: {e}")
+        logger.error(f"Error: {e}")
 
     # Execute commands 'make clean' and 'make html' sequentially
     try:
         subprocess.run(["make", "clean"], cwd=sphinx_dir, shell=True, check=True)
         subprocess.run(["make", "html"], cwd=sphinx_dir, shell=True, check=True)
-        LOGGER.info("Commands 'make clean' and 'make html' successfully executed.")
+        logger.info("Commands 'make clean' and 'make html' successfully executed.")
     except subprocess.CalledProcessError as e:
-        LOGGER.error(f"Commands 'make clean' and 'make html' failed with return code {e.returncode}: {e.cmd}")
+        logger.error(f"Commands 'make clean' and 'make html' failed with return code {e.returncode}: {e.cmd}")
         exit(1)
     except Exception as e:
-        LOGGER.error(f"An error occurred: {e}")
+        logger.error(f"An error occurred: {e}")
         exit(1)
 
     try:
         sphinx_dir_html = os.path.join(sphinx_dir, "_build", "html")
         # Copy the contents of the source directory to the destination directory
         shutil.copytree(sphinx_dir_html, docs_dir, dirs_exist_ok=True)
-        LOGGER.info(f"Contents of '{sphinx_dir_html}' copied to '{docs_dir}' successfully.")
+        logger.info(f"Contents of '{sphinx_dir_html}' copied to '{docs_dir}' successfully.")
     except Exception as e:
-        LOGGER.error(f"Error: {e}")
+        logger.error(f"Error: {e}")
 
     # Execute command 'make clean'
     try:
         subprocess.run(["make", "clean"], cwd=sphinx_dir, shell=True, check=True)
-        LOGGER.info("Commands 'make clean' and 'make html' successfully executed.")
+        logger.info("Commands 'make clean' and 'make html' successfully executed.")
     except subprocess.CalledProcessError as e:
-        LOGGER.error(f"Commands 'make clean' and 'make html' failed with return code {e.returncode}: {e.cmd}")
+        logger.error(f"Commands 'make clean' and 'make html' failed with return code {e.returncode}: {e.cmd}")
         exit(1)
     except Exception as e:
-        LOGGER.error(f"An error occurred: {e}")
+        logger.error(f"An error occurred: {e}")
         exit(1)
 
-    LOGGER.info("Documentation commands executed successfully.")
+    logger.info("Documentation commands executed successfully.")
 
 
 if __name__ == "__main__":
