@@ -1,4 +1,5 @@
 """Util functions related to graphs."""
+from icecream import ic
 from rdflib import Graph
 
 from .errors import report_error_io_read
@@ -18,6 +19,8 @@ def load_graph_safely(ontology_file: str, file_format: str = "not_provided") -> 
     :rtype: Graph
     """
     ontology_graph = Graph()
+
+    print(f"{ontology_file = }")
 
     try:
         if file_format == "not_provided":

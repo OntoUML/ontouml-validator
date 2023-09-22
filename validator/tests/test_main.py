@@ -6,6 +6,15 @@ import csv
 import os
 
 import pytest
+from icecream import ic
+
+from validator.modules.utils_graph import load_graph_safely
+from validator.validations.execute_rules import execute_rule_switch
+
+# Guarantees that the file will be found as it searches using this file as basis
+package_dir = os.path.dirname(os.path.dirname(__file__))
+test_files_dir = "tests" + os.path.sep + "test_files" + os.path.sep
+file_path = os.path.join(package_dir, test_files_dir, "tests_list.csv")
 
 
 def get_test_list() -> list[tuple[str, str, str]]:
@@ -22,11 +31,6 @@ def get_test_list() -> list[tuple[str, str, str]]:
     :rtype: list[tuple[str,str,str]]
     """
 
-    # Guarantees that the file will be found as it searches using this file as basis
-    package_dir = os.path.dirname(os.path.dirname(__file__))
-    test_files_dir = "tests" + os.path.sep + "test_files" + os.path.sep
-    file_path = os.path.join(package_dir, test_files_dir, "tests_list.csv")
-
     # Read file with all tests information to generate fixture
     with open(file_path, mode="r") as csv_file:
         tests_information = []
@@ -40,14 +44,17 @@ def get_test_list() -> list[tuple[str, str, str]]:
 
 # Execute list generation
 LIST_OF_TESTS = get_test_list()
+ic(LIST_OF_TESTS)
 
 
-@pytest.mark.parametrize("assumption, input_file, expected_result", LIST_OF_TESTS)
-def test_scior(assumption: str, input_file: str, expected_result: int):
+@pytest.mark.parametrize("assumption, rule_code, input_file, expected_result", LIST_OF_TESTS)
+def test_scior(assumption: str, rule_code: str, input_file: str, expected_result: int):
     """Executes the validator in a received input file and checks if the execution result matches the expected value.
 
     :param assumption: Indicates the world-assumption to be used in test execution. Valid values are: 'cwa' and 'owa'.
     :type assumption: str
+    :param rule_code: The code of the validation rule to be tested.
+    :type rule_code: str
     :param input_file: Path to an input file that is going to be validated as a test.
     :type input_file: str
     :param expected_result: Indicates the test's expected result, which can be one of the following:
@@ -57,8 +64,12 @@ def test_scior(assumption: str, input_file: str, expected_result: int):
     :type expected_result: int
     """
 
-    # result = validate_ontouml_model(input_path=input_file, assumption=assumption, execution_mode="test")
+    input_file_path = os.path.join(package_dir, test_files_dir, input_file)
+    ontouml_model = load_graph_safely(input_file_path, "ttl")
 
+    rule_w_list, rule_e_list = execute_rule_switch(ontouml_model, rule_code)
+
+    # adjustments according to assumption
     # check if resulting lists are empty or not
     # compare with expected result
 
