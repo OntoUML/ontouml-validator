@@ -1,25 +1,25 @@
 build-system:
   build-backend: poetry.core.masonry.api
   requires:
-  - poetry-core
+    - poetry-core
 tool:
   poetry:
     authors:
-    - Pedro Paulo F. Barcelos <p.p.favatobarcelos@utwente.nl>
+      - Pedro Paulo F. Barcelos <p.p.favatobarcelos@utwente.nl>
     dependencies:
       python: ^3.11
     description: OntoUML Graph Validator
     documentation: https://w3id.org/ontouml/validator/docs
     exclude:
-    - ontouml-validator/tests
+      - ontouml-validator/tests
     homepage: https://w3id.org/ontouml/validator
     keywords:
-    - semantic-web
-    - knowledge-graph
-    - ontouml
-    - ontology-driven-development
-    - ontouml-vocabulary
-    - ontouml-metamodel
+      - semantic-web
+      - knowledge-graph
+      - ontouml
+      - ontology-driven-development
+      - ontouml-vocabulary
+      - ontouml-metamodel
     license: Apache-2.0
     name: ontouml-validator
     readme: README.md

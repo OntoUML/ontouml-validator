@@ -6,11 +6,8 @@ command-line arguments and for initializing the global variable ARGUMENTS contai
 """
 
 import argparse
-import inspect
-import os
 import pathlib
 
-from .errors import report_error_requirement_not_met, report_error_invalid_parameter
 from .globals import METADATA
 from .logger import initialize_logger
 from .utils_validations import validate_execution_mode
@@ -21,7 +18,7 @@ LOGGER = initialize_logger()
 
 
 def treat_user_arguments() -> dict:
-    """ This function parses the command-line arguments provided by the user and performs necessary validations.
+    """This function parses the command-line arguments provided by the user and performs necessary validations.
 
     :return: Dictionary with arguments provided by the user or default values.
     :rtype: dict
@@ -32,21 +29,32 @@ def treat_user_arguments() -> dict:
     about_message = METADATA["name"] + " - version " + METADATA["version"]
 
     # PARSING ARGUMENTS
-    args_parser = argparse.ArgumentParser(prog=METADATA["name"],
-                                          description=METADATA["description"] + ". Version: " + METADATA["version"],
-                                          allow_abbrev=False, epilog="More information at: " + METADATA["repository"])
+    args_parser = argparse.ArgumentParser(
+        prog=METADATA["name"],
+        description=METADATA["description"] + ". Version: " + METADATA["version"],
+        allow_abbrev=False,
+        epilog="More information at: " + METADATA["repository"],
+    )
 
     args_parser.version = about_message
 
     # POSITIONAL ARGUMENT
-    args_parser.add_argument("input_path", type=str, action="store",
-                             help="The path of the graph or json input file to be validated.")
+    args_parser.add_argument(
+        "input_path", type=str, action="store", help="The path of the graph or json input file to be validated."
+    )
 
     # OPTIONAL ARGUMENT
-    args_parser.add_argument("-s", "--silent", action="store_true",
-                             help="Silent mode. Do not print warnings and errors on screen.")
-    args_parser.add_argument("-a", "--assumption", action="store", choices=["owa", "cwa"], default="owa",
-                             help="Format to save the decoded file. Default is 'ttl'.")
+    args_parser.add_argument(
+        "-s", "--silent", action="store_true", help="Silent mode. Do not print warnings and errors on screen."
+    )
+    args_parser.add_argument(
+        "-a",
+        "--assumption",
+        action="store",
+        choices=["owa", "cwa"],
+        default="owa",
+        help="Format to save the decoded file. Default is 'ttl'.",
+    )
 
     # AUTOMATIC ARGUMENTS
     args_parser.add_argument("-v", "--version", action="version", help="Print the software version and exit.")
@@ -55,20 +63,19 @@ def treat_user_arguments() -> dict:
     arguments = args_parser.parse_args()
 
     # Asserting dictionary keys
-    arguments_dictionary = {"input_path": arguments.input_path,
-                            "silent": arguments.silent,
-                            "assumption": arguments.assumption}
+    arguments_dictionary = {
+        "input_path": arguments.input_path,
+        "silent": arguments.silent,
+        "assumption": arguments.assumption,
+    }
 
     LOGGER.debug(f"Arguments parsed. Obtained values are: {arguments_dictionary}.")
 
     return arguments_dictionary
 
 
-def initialize_arguments(input_path: str,
-                         silent: bool = True,
-                         assumption: str = "owa",
-                         execution_mode: str = "import"):
-    """ This function initializes the global variable ARGUMENTS of type dictionary, which contains user-provided
+def initialize_arguments(input_path: str, silent: bool = True, assumption: str = "owa", execution_mode: str = "import"):
+    """This function initializes the global variable ARGUMENTS of type dictionary, which contains user-provided
     (when executed in script mode) or default arguments (when executed as a library or for testing).
     The ARGUMENTS variable must be initialized in every possible execution mode.
 

@@ -6,7 +6,7 @@ from datetime import datetime
 
 
 def logger_get_date_time() -> str:
-    """ Return a string in a specified format with date and time. Format example: 2022.10.23-14.43
+    """Return a string in a specified format with date and time. Format example: 2022.10.23-14.43
 
     :return: Formatted date and time.
     :rtype: str
@@ -19,7 +19,7 @@ def logger_get_date_time() -> str:
 
 
 def initialize_logger(execution_mode: str = "import") -> logging.Logger:
-    """ Create and initialize logger. The created logger is called 'execution-logger'.
+    """Create and initialize logger. The created logger is called 'execution-logger'.
     Different triggers are defined for each execution mode:
         - script: INFO
         - import: ERROR
@@ -39,7 +39,6 @@ def initialize_logger(execution_mode: str = "import") -> logging.Logger:
 
     # Creates a new logger only if current logger does not exist
     if not logging.getLogger("execution-logger").hasHandlers():
-
         # Creating CONSOLE handlers
         console_handler = logging.StreamHandler()
 
@@ -63,9 +62,10 @@ def initialize_logger(execution_mode: str = "import") -> logging.Logger:
         file_handler.setLevel(logging.DEBUG)
 
         # Create formatters and add it to handlers
-        console_format = logging.Formatter('%(levelname)s - %(message)s')
-        file_format = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s [func: %(funcName)s '
-                                        'in %(filename)s]')
+        console_format = logging.Formatter("%(levelname)s - %(message)s")
+        file_format = logging.Formatter(
+            "%(asctime)s - %(levelname)s - %(message)s [func: %(funcName)s " "in %(filename)s]"
+        )
         console_handler.setFormatter(console_format)
         file_handler.setFormatter(file_format)
 

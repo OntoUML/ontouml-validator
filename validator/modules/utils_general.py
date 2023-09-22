@@ -3,7 +3,7 @@ from datetime import datetime
 
 
 def count_elements_types(element_type_list: list[str], element_counting: dict) -> int:
-    """ Returns the number of elements (in the already counted data) of the types given in a list.
+    """Returns the number of elements (in the already counted data) of the types given in a list.
     Receives a dictionary of number of items and returns the value corresponding to the provided argument.
 
     :param element_type_list: List of types of elements to have their count value returned.
@@ -24,7 +24,7 @@ def count_elements_types(element_type_list: list[str], element_counting: dict) -
 
 
 def get_date_time(date_time_format: str) -> str:
-    """ Return a string with date and time according to the specified format received as argument.
+    """Return a string with date and time according to the specified format received as argument.
     For valid formats: https://docs.python.org/3.11/library/datetime.html#strftime-and-strptime-format-codes
 
     :param date_time_format: Valid format accepted by the datetime function.
