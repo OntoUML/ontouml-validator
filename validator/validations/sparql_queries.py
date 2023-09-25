@@ -23,3 +23,15 @@ WHERE {
     OPTIONAL {?class_id ontouml:stereotype ?class_st .}
 } """
 )
+
+QUERY_CL003 = (
+    ONTOUML_PREFIX
+    + """
+SELECT DISTINCT ?class_id ?class_name
+WHERE {
+  ?class_id rdf:type ontouml:Class .
+  ?class_id ontouml:stereotype ontouml:enumeration .
+  ?class_id ontouml:name ?class_name .
+}
+"""
+)

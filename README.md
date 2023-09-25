@@ -1,15 +1,18 @@
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8215446.svg)](https://doi.org/10.5281/zenodo.8215446)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8214977.svg)](https://doi.org/10.5281/zenodo.8214977)
 [![Project Status - Active](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 ![GitHub - Release Date - PublishedAt](https://img.shields.io/github/release-date/ontouml/ontouml-validator)
 ![GitHub - Last Commit - Branch](https://img.shields.io/github/last-commit/ontouml/ontouml-validator/main)
 ![PyPI - Project](https://img.shields.io/pypi/v/ontouml-validator)
-![PyPI - Downloads](https://img.shields.io/pypi/dm/ontouml-validator?label=pypi%20downloads)
 ![Language - Top](https://img.shields.io/github/languages/top/ontouml/ontouml-validator)
 ![Language - Version](https://img.shields.io/pypi/pyversions/ontouml-validator)
 ![CodeFactor Grade](https://img.shields.io/codefactor/grade/github/ontouml/ontouml-validator)
 ![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/OntoUML/ontouml-validator/badge)
 ![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)
 ![License - GitHub](https://img.shields.io/github/license/ontouml/ontouml-validator)
+[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit)](https://github.com/pre-commit/pre-commit)
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/OntoUML/ontouml-validator/main.svg)](https://results.pre-commit.ci/latest/github/OntoUML/ontouml-validator/main)
+![Website](https://img.shields.io/website/http/ontouml.github.io/ontouml-validator.svg)
+![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/ontouml/ontouml-validator/code_testing.yml)
 
 
 # ontouml-validator
