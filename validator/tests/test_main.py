@@ -3,11 +3,13 @@
 A list of tests is read from the file tests_list.csv and each test is individually performed.
 """
 import csv
+import inspect
 import os
 
 import pytest
 from icecream import ic
 
+from validator.modules.errors import report_error_end_of_switch
 from validator.modules.utils_graph import load_graph_safely
 from validator.validations.rules_general import execute_rule_switch
 
@@ -64,31 +66,43 @@ def test_scior(assumption: str, rule_code: str, input_file: str, expected_result
     :type expected_result: int
     """
 
+    # Load test file
     input_file_path = os.path.join(package_dir, test_files_dir, input_file)
     ontouml_model = load_graph_safely(input_file_path, "ttl")
 
+    # Execute and get results
     rule_w_list, rule_e_list = execute_rule_switch(ontouml_model, rule_code)
 
+    # In CWA, all warnings are errors
     if assumption == "cwa":
         rule_e_list.extend(rule_w_list)
         rule_w_list.clear()
 
+    # Generate boolean result according to execution
     is_valid = True if (not (rule_w_list) and not (rule_e_list)) else False
     is_warning = True if (rule_w_list and not (rule_e_list)) else False
     is_error = True if rule_e_list else False
 
+    # Creating fail message to be used if necessary
     if is_valid:
         result = "valid"
     elif is_warning:
         result = "warning"
-    else:
+    elif is_error:
         result = "error"
+    else:
+        current_function = inspect.stack()[0][3]
+        report_error_end_of_switch("result", current_function)
 
     test_fail_message = f"Expected {expected_result}, got {result}."
 
+    # Assertions
     if expected_result == "valid":
         assert is_valid, test_fail_message
-    if expected_result == "warning":
+    elif expected_result == "warning":
         assert is_warning, test_fail_message
-    if expected_result == "error":
+    elif expected_result == "error":
         assert is_error, test_fail_message
+    else:
+        current_function = inspect.stack()[0][3]
+        report_error_end_of_switch("is_valid", current_function)

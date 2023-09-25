@@ -34,4 +34,4 @@ jobs:
           pip install -r requirements.txt
 
       - name: Testing with pytest
-        run: pytest ./validator/tests/test_main.py
+        run: pytest .\validator\tests\test_main.py
