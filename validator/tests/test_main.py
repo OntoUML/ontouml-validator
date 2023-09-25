@@ -50,7 +50,7 @@ ic(LIST_OF_TESTS)
 
 
 @pytest.mark.parametrize("assumption, rule_code, input_file, expected_result", LIST_OF_TESTS)
-def test_scior(assumption: str, rule_code: str, input_file: str, expected_result: int):
+def test_all(assumption: str, rule_code: str, input_file: str, expected_result: int):
     """Executes the validator in a received input file and checks if the execution result matches the expected value.
 
     :param assumption: Indicates the world-assumption to be used in test execution. Valid values are: 'cwa' and 'owa'.

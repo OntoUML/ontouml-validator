@@ -1,0 +1,20 @@
+:py:mod:`validator.tests`
+=========================
+
+.. py:module:: validator.tests
+
+.. autoapi-nested-parse::
+
+   Empty __init__.py file.
+
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   test_main/index.rst
+
+

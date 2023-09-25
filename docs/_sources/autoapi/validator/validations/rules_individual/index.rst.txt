@@ -1,0 +1,42 @@
+:py:mod:`validator.validations.rules_individual`
+================================================
+
+.. py:module:: validator.validations.rules_individual
+
+.. autoapi-nested-parse::
+
+   OntoUML Rule Execution Module.
+
+   This module provides a collection of functions for executing various OntoUML validation rules.
+   It is designed to validate OntoUML models loaded as RDF graphs using a set of predefined rules.
+   The module currently contains implementations for multiple rules. Additional rules can be easily added in the future.
+
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   validator.validations.rules_individual.execute_rule_CL001
+
+
+
+.. py:function:: execute_rule_CL001(ontouml_model, rule_code)
+
+   Execute rule CL001 and return its description and results.
+
+   :param ontouml_model: The OntoUML model in graph format (using the ontouml-vocabulary) to be validated by the rule.
+   :type ontouml_model: Graph
+   :param rule_code: Code of this rule.
+   :type rule_code: str
+   :return: A tuple with two components:
+       - A list of all warnings (as a ResultIssue object) found during the specific rule's validation process.
+       - A list of all errors (as a ResultIssue object) found during the specific rule's validation process.
+   :rtype: tuple[list[ResultIssue], list[ResultIssue]]
+
+

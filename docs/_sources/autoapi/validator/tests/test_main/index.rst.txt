@@ -1,0 +1,86 @@
+:py:mod:`validator.tests.test_main`
+===================================
+
+.. py:module:: validator.tests.test_main
+
+.. autoapi-nested-parse::
+
+   This script is used to perform tests on the ontouml-validator using pytest.
+
+   A list of tests is read from the file tests_list.csv and each test is individually performed.
+
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   validator.tests.test_main.get_test_list
+   validator.tests.test_main.test_all
+
+
+
+Attributes
+~~~~~~~~~~
+
+.. autoapisummary::
+
+   validator.tests.test_main.package_dir
+   validator.tests.test_main.test_files_dir
+   validator.tests.test_main.file_path
+   validator.tests.test_main.LIST_OF_TESTS
+
+
+.. py:data:: package_dir
+
+   
+
+.. py:data:: test_files_dir
+
+   
+
+.. py:data:: file_path
+
+   
+
+.. py:function:: get_test_list()
+
+   Loads information about test test_files from csv and creates a list of tuples with tests' information.
+   Note: the input file does not have a header.
+
+   :return: The returned tuples' content is:
+               [0] (str) world-assumption to be used in the test. Valid values are "cwa" and "owa".
+               [1] (str) input file name: name of the input file to be tested.
+               [2] (str) expected result: indicates if the result is expected to be:
+                   - 'valid': valid
+                   - 'warning': invalid and generate a warning
+                   - 'error': invalid and generate an error
+   :rtype: list[tuple[str,str,str]]
+
+
+.. py:data:: LIST_OF_TESTS
+
+   
+
+.. py:function:: test_all(assumption, rule_code, input_file, expected_result)
+
+   Executes the validator in a received input file and checks if the execution result matches the expected value.
+
+   :param assumption: Indicates the world-assumption to be used in test execution. Valid values are: 'cwa' and 'owa'.
+   :type assumption: str
+   :param rule_code: The code of the validation rule to be tested.
+   :type rule_code: str
+   :param input_file: Path to an input file that is going to be validated as a test.
+   :type input_file: str
+   :param expected_result: Indicates the test's expected result, which can be one of the following:
+       - 'valid': The evaluation result is expected to be valid.
+       - 'warning': The evaluation result is expected to generate a warning.
+       - 'error': The evaluation result is expected to generate an error.
+   :type expected_result: int
+
+

@@ -1,0 +1,23 @@
+:py:mod:`validator.validations`
+===============================
+
+.. py:module:: validator.validations
+
+.. autoapi-nested-parse::
+
+   Empty __init__.py file.
+
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   result_issue/index.rst
+   rules_general/index.rst
+   rules_individual/index.rst
+   sparql_queries/index.rst
+
+

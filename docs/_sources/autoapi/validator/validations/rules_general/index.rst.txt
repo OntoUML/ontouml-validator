@@ -1,0 +1,55 @@
+:py:mod:`validator.validations.rules_general`
+=============================================
+
+.. py:module:: validator.validations.rules_general
+
+.. autoapi-nested-parse::
+
+   OntoUML Validation Utilities.
+
+   This module provides utility functions for validating input parameters and assumptions related to the OntoUML
+   validation process. It includes functions for validating input file extensions to ensure compatibility
+   with RDFLib's supported formats and for normalizing and validating world assumptions.
+
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   validator.validations.rules_general.execute_rule_switch
+   validator.validations.rules_general.execute_all_validation_rules
+
+
+
+.. py:function:: execute_rule_switch(ontouml_model, rule_code)
+
+   Select a specific validation rule function based on the given 'rule_code' to be executed on the provided     OntoUML model.
+
+   :param ontouml_model: The OntoUML model in graph format (using the ontouml-vocabulary) to be validated by the rule.
+   :type ontouml_model: Graph
+   :param rule_code: Code of the specific rule to be executed.
+   :type rule_code: str
+   :return: A tuple with two components:
+       - A list of all warnings found during the specific rule's validation process.
+       - A list of all errors found during the specific rule's validation process.
+   :rtype: tuple[list[ResultIssue], list[ResultIssue]]
+
+
+.. py:function:: execute_all_validation_rules(ontouml_model)
+
+   Execute all validation rules and collect their results.
+
+   :param ontouml_model: The OntoUML model in graph format (using the ontouml-vocabulary) to be validated.
+   :type ontouml_model: Graph
+   :return: A tuple with two components:
+       - A list of all warnings found during the validation process.
+       - A list of all errors found during the validation process.
+   :rtype: tuple[list[str], list[str]]
+
+

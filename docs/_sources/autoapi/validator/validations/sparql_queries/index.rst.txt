@@ -1,0 +1,23 @@
+:py:mod:`validator.validations.sparql_queries`
+==============================================
+
+.. py:module:: validator.validations.sparql_queries
+
+.. autoapi-nested-parse::
+
+   This model contains all SPARQL queries used for validating an OntoUML Model.
+
+
+
+Module Contents
+---------------
+
+.. py:data:: ONTOUML_PREFIX
+   :value: 'PREFIX ontouml: <https://w3id.org/ontouml#> '
+
+   
+
+.. py:data:: QUERY_CL001
+
+   
+

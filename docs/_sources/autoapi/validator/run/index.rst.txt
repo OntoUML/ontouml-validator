@@ -1,0 +1,23 @@
+:py:mod:`validator.run`
+=======================
+
+.. py:module:: validator.run
+
+.. autoapi-nested-parse::
+
+   Main module for validating OntoUML Graphs.
+
+   This module serves as the main component for validating OntoUML Graphs, providing functions to verify and assess
+   the correctness of OntoUML models. The module handles input validation, model loading, and execution flow control,
+   supporting multiple execution modes.
+
+
+
+Module Contents
+---------------
+
+.. py:data:: ontouml_file
+   :value: './validator/tests/test_files/CL001F.ttl'
+
+   
+
