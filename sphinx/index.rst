@@ -1,6 +1,6 @@
-.. ontouml-validator documentation master file
+.. ontouml-validator code documentation master file
 
-Welcome to ontouml-validator's documentation!
+Welcome to ontouml-validator's code documentation!
 =============================================
 
 .. image:: ../validator/resources/logo-validator-reduced.png
@@ -8,8 +8,6 @@ Welcome to ontouml-validator's documentation!
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
-
-
 
 Indices and tables
 ==================

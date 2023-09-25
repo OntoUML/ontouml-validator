@@ -1,4 +1,4 @@
-validator.modules
+validator.tests
 ==========
 
 .. toctree::

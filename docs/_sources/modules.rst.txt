@@ -1,7 +1,5 @@
-validator
+validator.modules
 ==========
 
 .. toctree::
    :maxdepth: 4
-
-   validator

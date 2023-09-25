@@ -8,6 +8,8 @@ Subpackages
    :maxdepth: 4
 
    validator.modules
+   validator.tests
+   validator.validations
 
 Submodules
 ----------

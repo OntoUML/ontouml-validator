@@ -12,3 +12,14 @@ WHERE {
     OPTIONAL {?class_id ontouml:stereotype ?class_st .}
 } GROUP BY ?class_id """
 )
+
+QUERY_CL002 = (
+    ONTOUML_PREFIX
+    + """
+SELECT DISTINCT ?class_id ?class_name ?class_st
+WHERE {
+    ?class_id rdf:type ontouml:Class .
+    ?class_id ontouml:name ?class_name .
+    OPTIONAL {?class_id ontouml:stereotype ?class_st .}
+} """
+)

@@ -7,7 +7,6 @@ import inspect
 import os
 
 import pytest
-from icecream import ic
 
 from validator.modules.errors import report_error_end_of_switch
 from validator.modules.utils_graph import load_graph_safely
@@ -21,7 +20,6 @@ file_path = os.path.join(package_dir, test_files_dir, "tests_list.csv")
 
 def get_test_list() -> list[tuple[str, str, str]]:
     """Loads information about test test_files from csv and creates a list of tuples with tests' information.
-    Note: the input file does not have a header.
 
     :return: The returned tuples' content is:
                 [0] (str) world-assumption to be used in the test. Valid values are "cwa" and "owa".
@@ -46,17 +44,16 @@ def get_test_list() -> list[tuple[str, str, str]]:
 
 # Execute list generation
 LIST_OF_TESTS = get_test_list()
-ic(LIST_OF_TESTS)
 
 
-@pytest.mark.parametrize("assumption, rule_code, input_file, expected_result", LIST_OF_TESTS)
-def test_all(assumption: str, rule_code: str, input_file: str, expected_result: int):
+@pytest.mark.parametrize("assumption, tested_rule_code, input_file, expected_result", LIST_OF_TESTS)
+def test_all(assumption: str, tested_rule_code: str, input_file: str, expected_result: int):
     """Executes the validator in a received input file and checks if the execution result matches the expected value.
 
     :param assumption: Indicates the world-assumption to be used in test execution. Valid values are: 'cwa' and 'owa'.
     :type assumption: str
-    :param rule_code: The code of the validation rule to be tested.
-    :type rule_code: str
+    :param tested_rule_code: The code of the validation rule to be tested.
+    :type tested_rule_code: str
     :param input_file: Path to an input file that is going to be validated as a test.
     :type input_file: str
     :param expected_result: Indicates the test's expected result, which can be one of the following:
@@ -71,7 +68,7 @@ def test_all(assumption: str, rule_code: str, input_file: str, expected_result: 
     ontouml_model = load_graph_safely(input_file_path, "ttl")
 
     # Execute and get results
-    rule_w_list, rule_e_list = execute_rule_switch(ontouml_model, rule_code)
+    rule_w_list, rule_e_list = execute_rule_switch(ontouml_model, tested_rule_code)
 
     # In CWA, all warnings are errors
     if assumption == "cwa":
