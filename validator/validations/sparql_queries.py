@@ -10,5 +10,5 @@ WHERE {
     ?class_id rdf:type ontouml:Class .
     ?class_id ontouml:name ?class_name .
     OPTIONAL {?class_id ontouml:stereotype ?class_st .}
-} GROUP BY ?class_name """
+} GROUP BY ?class_id """
 )

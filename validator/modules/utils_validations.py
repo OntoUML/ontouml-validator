@@ -1,3 +1,9 @@
+"""OntoUML Input Validation and Assumption Normalization Module.
+
+This module contains utility functions for validating input parameters and assumptions used in OntoUML validation
+processes. These utility functions are designed to ensure the correctness of input data and assumptions,
+contributing to the reliability of the OntoUML validation process.
+"""
 import inspect
 
 from ..modules.errors import report_error_invalid_parameter, report_error_requirement_not_met

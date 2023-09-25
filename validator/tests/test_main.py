@@ -9,7 +9,7 @@ import pytest
 from icecream import ic
 
 from validator.modules.utils_graph import load_graph_safely
-from validator.validations.execute_rules import execute_rule_switch
+from validator.validations.rules_general import execute_rule_switch
 
 # Guarantees that the file will be found as it searches using this file as basis
 package_dir = os.path.dirname(os.path.dirname(__file__))
@@ -69,10 +69,26 @@ def test_scior(assumption: str, rule_code: str, input_file: str, expected_result
 
     rule_w_list, rule_e_list = execute_rule_switch(ontouml_model, rule_code)
 
-    # adjustments according to assumption
-    # check if resulting lists are empty or not
-    # compare with expected result
+    if assumption == "cwa":
+        rule_e_list.extend(rule_w_list)
+        rule_w_list.clear()
 
-    # assert no_error, f"EXECUTION ERROR! Error not associated with file consistency or Scior's results."
-    # assert is_consistent == is_consistent, f"CONSISTENCY NOT MATCHED! Expected {exp_consist_msg}, got {got_consist_msg}."
-    # assert is_correct, f"RESULT NOT MATCHED! Expected {exp_result_msg}, got {got_result_msg}."
+    is_valid = True if (not (rule_w_list) and not (rule_e_list)) else False
+    is_warning = True if (rule_w_list and not (rule_e_list)) else False
+    is_error = True if rule_e_list else False
+
+    if is_valid:
+        result = "valid"
+    elif is_warning:
+        result = "warning"
+    else:
+        result = "error"
+
+    test_fail_message = f"Expected {expected_result}, got {result}."
+
+    if expected_result == "valid":
+        assert is_valid, test_fail_message
+    if expected_result == "warning":
+        assert is_warning, test_fail_message
+    if expected_result == "error":
+        assert is_error, test_fail_message

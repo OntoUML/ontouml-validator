@@ -45,4 +45,4 @@ line-length = 120
 
 [tool.vulture]
 paths = ["."]
-exclude = ["docs/", "sphinx/", "library.py", "venv/"]
+exclude = ["docs/", "sphinx/", "library.py", "venv/", "validator/modules/errors.py"]

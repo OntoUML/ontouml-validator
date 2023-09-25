@@ -1,10 +1,9 @@
 """Util functions related to graphs."""
-from icecream import ic
+from loguru import logger
 from rdflib import Graph
 
 from .errors import report_error_io_read
 from .utils_validations import validate_input_extension
-from loguru import logger
 
 
 def load_graph_safely(ontology_file: str, file_format: str = "not_provided") -> Graph:

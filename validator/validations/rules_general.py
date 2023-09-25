@@ -1,38 +1,16 @@
+"""OntoUML Validation Utilities.
+
+This module provides utility functions for validating input parameters and assumptions related to the OntoUML
+validation process. It includes functions for validating input file extensions to ensure compatibility
+with RDFLib's supported formats and for normalizing and validating world assumptions.
+"""
 import inspect
 
-from icecream import ic
-from loguru import logger
 from rdflib import Graph
 
 from .result_issue import ResultIssue
-from .sparql_queries import QUERY_CL001
+from .rules_individual import execute_rule_CL001
 from ..modules.errors import report_error_end_of_switch
-
-
-def execute_rule_CL001(ontouml_model: Graph) -> tuple[list[ResultIssue], list[ResultIssue]]:
-    """Execute rule CL001 and return its description and results.
-
-    :param ontouml_model: The OntoUML model in graph format (using the ontouml-vocabulary) to be validated by the rule.
-    :type ontouml_model: Graph
-    :return: A tuple with two components:
-        - A list of all warnings (as a ResultIssue object) found during the specific rule's validation process.
-        - A list of all errors (as a ResultIssue object) found during the specific rule's validation process.
-    :rtype: tuple[list[ResultIssue], list[ResultIssue]]
-    """
-
-    rule_description = "Every class must be decorated with exactly one stereotype."
-
-    query_answer = ontouml_model.query(QUERY_CL001)
-
-    for row in query_answer:
-        class_name = row.class_name.value
-        class_sts = row.num_sts.value
-        ic(class_name, class_sts)
-
-    rule_w_list = []
-    rule_e_list = []
-
-    return rule_w_list, rule_e_list
 
 
 def execute_rule_switch(ontouml_model: Graph, rule_code: str) -> tuple[list[ResultIssue], list[ResultIssue]]:
@@ -49,7 +27,7 @@ def execute_rule_switch(ontouml_model: Graph, rule_code: str) -> tuple[list[Resu
     :rtype: tuple[list[ResultIssue], list[ResultIssue]]
     """
     if rule_code == "CL001":
-        rule_w_list, rule_e_list = execute_rule_CL001(ontouml_model)
+        rule_w_list, rule_e_list = execute_rule_CL001(ontouml_model, rule_code)
     # elif rule_code == "CL002":
     #     rule_w_list, rule_e_list = execute_rule_CL002(ontouml_model)
     # elif rule_code == "CL003":
@@ -58,8 +36,6 @@ def execute_rule_switch(ontouml_model: Graph, rule_code: str) -> tuple[list[Resu
     else:
         current_function = inspect.stack()[0][3]
         report_error_end_of_switch("rule_code", current_function)
-
-    ic(rule_w_list, rule_e_list)
 
     return rule_w_list, rule_e_list
 

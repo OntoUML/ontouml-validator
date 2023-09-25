@@ -1,9 +1,24 @@
+"""Library for the OntoUML Validation.
+
+This module provides a set of functions for validating OntoUML models stored in graph format using specified world
+assumptions ('owa' or 'cwa'). OntoUML is a modeling language for ontology-based conceptual modeling.
+
+These functions utilize the OntoUML vocabulary and a set of validation rules to determine the validity of the provided
+models. They return a tuple with information about the validation results, including whether the model is valid,
+any warnings encountered, and any errors identified.
+
+The module also contains auxiliary functions for loading OntoUML models and handling world assumptions.
+
+Usage:
+1. Import the module: `from ontouml_validator import validate_ontouml_file, validate_ontouml_model`
+2. Use the provided functions to validate OntoUML models.
+"""
+from loguru import logger
 from rdflib import Graph
 
-from loguru import logger
 from .modules.utils_graph import load_graph_safely
 from .modules.utils_validations import validate_assumption
-from .validations.execute_rules import execute_all_validation_rules
+from .validations.rules_general import execute_all_validation_rules
 
 
 def validate_ontouml_file(ontouml_file_path: str, world_assumption: str) -> tuple[bool, list[str], list[str]]:
@@ -22,7 +37,6 @@ def validate_ontouml_file(ontouml_file_path: str, world_assumption: str) -> tupl
         - A list of errors found during the validation process.
     :rtype: tuple[bool,list[str],list[str]]
     """
-
     ontouml_model = load_graph_safely(ontouml_file_path)
     is_valid, w_list, e_list = validate_ontouml_model(ontouml_model, world_assumption)
     return is_valid, w_list, e_list

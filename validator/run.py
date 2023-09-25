@@ -1,4 +1,4 @@
-""" Main module for validating OntoUML Graphs.
+"""Main module for validating OntoUML Graphs.
 
 This module serves as the main component for validating OntoUML Graphs, providing functions to verify and assess
 the correctness of OntoUML models. The module handles input validation, model loading, and execution flow control,
