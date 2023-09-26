@@ -9,7 +9,13 @@ import inspect
 from rdflib import Graph
 
 from .result_issue import ResultIssue
-from .rules_individual import execute_rule_CL_ST_01, execute_rule_CL_ST_02, execute_rule_CL_EN_01, execute_rule_CL_EN_02
+from .rules_individual import (
+    execute_rule_CL_ST_01,
+    execute_rule_CL_ST_02,
+    execute_rule_CL_EN_01,
+    execute_rule_CL_EN_02,
+    execute_rule_CL_EN_03,
+)
 from ..modules.errors import report_error_end_of_switch
 
 
@@ -34,6 +40,8 @@ def execute_rule_switch(ontouml_model: Graph, rule_code: str) -> tuple[list[Resu
         rule_w_list, rule_e_list = execute_rule_CL_EN_01(ontouml_model, rule_code)
     elif rule_code == "CL_EN_02":
         rule_w_list, rule_e_list = execute_rule_CL_EN_02(ontouml_model, rule_code)
+    elif rule_code == "CL_EN_03":
+        rule_w_list, rule_e_list = execute_rule_CL_EN_03(ontouml_model, rule_code)
     # This situation must never be reached
     else:
         current_function = inspect.stack()[0][3]
