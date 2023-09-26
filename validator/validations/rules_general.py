@@ -16,6 +16,7 @@ from .rules_individual import (
     execute_rule_CL_EN_02,
     execute_rule_CL_EN_03,
     execute_rule_CL_EN_04,
+    execute_rule_CL_EN_05,
 )
 from ..modules.errors import report_error_end_of_switch
 
@@ -45,6 +46,8 @@ def execute_rule_switch(ontouml_model: Graph, rule_code: str) -> tuple[list[Resu
         rule_w_list, rule_e_list = execute_rule_CL_EN_03(ontouml_model, rule_code)
     elif rule_code == "CL_EN_04":
         rule_w_list, rule_e_list = execute_rule_CL_EN_04(ontouml_model, rule_code)
+    elif rule_code == "CL_EN_05":
+        rule_w_list, rule_e_list = execute_rule_CL_EN_05(ontouml_model, rule_code)
     # This situation must never be reached
     else:
         current_function = inspect.stack()[0][3]
