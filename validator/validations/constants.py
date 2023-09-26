@@ -1,5 +1,7 @@
 """Constants to be used globally in the code."""
 
+ONTOUML_NAMESPACE = "https://w3id.org/ontouml#"
+
 ONTOUML_CLASS_STEREOTYPES = [
     "https://w3id.org/ontouml#abstract",
     "https://w3id.org/ontouml#category",

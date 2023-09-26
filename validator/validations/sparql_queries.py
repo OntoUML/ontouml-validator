@@ -32,6 +32,20 @@ WHERE {
   ?class_id rdf:type ontouml:Class .
   ?class_id ontouml:stereotype ontouml:enumeration .
   ?class_id ontouml:name ?class_name .
+  ?class_id ontouml:attribute ?class_at .
+}
+"""
+)
+
+QUERY_CL_EN_02 = (
+    ONTOUML_PREFIX
+    + """
+SELECT DISTINCT ?class_id ?class_name ?class_st
+WHERE {
+  ?class_id rdf:type ontouml:Class .
+  ?class_id ontouml:name ?class_name .
+  ?class_id ontouml:literal ?class_lt .
+  OPTIONAL {?class_id ontouml:stereotype ?class_st .}
 }
 """
 )
