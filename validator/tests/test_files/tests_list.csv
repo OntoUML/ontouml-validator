@@ -53,3 +53,11 @@ owa,CL_EN_03,CL_EN_03B.ttl,warning
 cwa,CL_EN_03,CL_EN_03B.ttl,error
 owa,CL_EN_03,CL_EN_03C.ttl,valid
 cwa,CL_EN_03,CL_EN_03C.ttl,valid
+owa,CL_EN_04,CL_EN_04A.ttl,valid
+cwa,CL_EN_04,CL_EN_04A.ttl,valid
+owa,CL_EN_04,CL_EN_04B.ttl,error
+cwa,CL_EN_04,CL_EN_04B.ttl,error
+owa,CL_EN_04,CL_EN_04C.ttl,error
+cwa,CL_EN_04,CL_EN_04C.ttl,error
+owa,CL_EN_04,CL_EN_04D.ttl,error
+cwa,CL_EN_04,CL_EN_04D.ttl,error

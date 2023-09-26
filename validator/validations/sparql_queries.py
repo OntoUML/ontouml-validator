@@ -60,3 +60,17 @@ WHERE {
     OPTIONAL {?class_id ontouml:literal ?class_lt .}
 } GROUP BY ?class_id """
 )
+
+
+QUERY_CL_EN_04 = (
+    ONTOUML_PREFIX
+    + """
+SELECT DISTINCT ?class_id ?class_name
+WHERE {
+  ?class_id rdf:type ontouml:Class .
+  ?class_id ontouml:stereotype ontouml:enumeration .
+  ?class_id ontouml:name ?class_name .
+  ?gen ontouml:general ?class_id .
+}
+"""
+)
