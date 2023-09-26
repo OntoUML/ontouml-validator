@@ -3,7 +3,7 @@
 Welcome to ontouml-validator's code documentation!
 =============================================
 
-.. image:: ../validator/resources/logo-validator-reduced.png
+.. image:: ../resources/logo-validator-reduced.png
 
 .. toctree::
    :maxdepth: 2
