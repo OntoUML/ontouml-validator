@@ -9,7 +9,7 @@ import inspect
 from rdflib import Graph
 
 from .result_issue import ResultIssue
-from .rules_individual import execute_rule_CL001, execute_rule_CL002, execute_rule_CL003
+from .rules_individual import execute_rule_CL_ST_01, execute_rule_CL_ST_02, execute_rule_CL_EN_01
 from ..modules.errors import report_error_end_of_switch
 
 
@@ -26,12 +26,12 @@ def execute_rule_switch(ontouml_model: Graph, rule_code: str) -> tuple[list[Resu
         - A list of all errors found during the specific rule's validation process.
     :rtype: tuple[list[ResultIssue], list[ResultIssue]]
     """
-    if rule_code == "CL001":
-        rule_w_list, rule_e_list = execute_rule_CL001(ontouml_model, rule_code)
-    elif rule_code == "CL002":
-        rule_w_list, rule_e_list = execute_rule_CL002(ontouml_model, rule_code)
-    elif rule_code == "CL003":
-        rule_w_list, rule_e_list = execute_rule_CL003(ontouml_model, rule_code)
+    if rule_code == "CL_ST_01":
+        rule_w_list, rule_e_list = execute_rule_CL_ST_01(ontouml_model, rule_code)
+    elif rule_code == "CL_ST_02":
+        rule_w_list, rule_e_list = execute_rule_CL_ST_02(ontouml_model, rule_code)
+    elif rule_code == "CL_EN_01":
+        rule_w_list, rule_e_list = execute_rule_CL_EN_01(ontouml_model, rule_code)
     # This situation must never be reached
     else:
         current_function = inspect.stack()[0][3]
@@ -54,7 +54,7 @@ def execute_all_validation_rules(ontouml_model: Graph) -> tuple[list[str], list[
     w_list = []
     e_list = []
 
-    validation_rules_list = ["CL001"]
+    validation_rules_list = ["CL_ST_01"]
 
     for rule_code in validation_rules_list:
         rule_w_list, rule_e_list = execute_rule_switch(ontouml_model, rule_code)

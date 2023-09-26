@@ -17,5 +17,5 @@ if __name__ == "__main__":
 
     logger.configure(handlers=[{"sink": sys.stderr, "level": "DEBUG"}])
 
-    ontouml_file = "./validator/tests/test_files/CL001F.ttl"
+    ontouml_file = "./validator/tests/test_files/CL_ST_01F.ttl"
     validate_ontouml_file(ontouml_file, "owa")

@@ -2,7 +2,7 @@
 
 ONTOUML_PREFIX = "PREFIX ontouml: <https://w3id.org/ontouml#> "
 
-QUERY_CL001 = (
+QUERY_CL_ST_01 = (
     ONTOUML_PREFIX
     + """
 SELECT ?class_id ?class_name (count(?class_st) as ?num_sts)
@@ -13,7 +13,7 @@ WHERE {
 } GROUP BY ?class_id """
 )
 
-QUERY_CL002 = (
+QUERY_CL_ST_02 = (
     ONTOUML_PREFIX
     + """
 SELECT DISTINCT ?class_id ?class_name ?class_st
@@ -24,7 +24,7 @@ WHERE {
 } """
 )
 
-QUERY_CL003 = (
+QUERY_CL_EN_01 = (
     ONTOUML_PREFIX
     + """
 SELECT DISTINCT ?class_id ?class_name

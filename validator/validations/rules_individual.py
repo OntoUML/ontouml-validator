@@ -9,11 +9,11 @@ from rdflib import Graph
 
 from validator.validations.constants import ONTOUML_CLASS_STEREOTYPES
 from validator.validations.result_issue import ResultIssue
-from validator.validations.sparql_queries import QUERY_CL001, QUERY_CL002, QUERY_CL003
+from validator.validations.sparql_queries import QUERY_CL_ST_01, QUERY_CL_ST_02, QUERY_CL_EN_01
 
 
-def execute_rule_CL001(ontouml_model: Graph, rule_code: str) -> tuple[list[ResultIssue], list[ResultIssue]]:
-    """Execute rule CL001 and return its description and results.
+def execute_rule_CL_ST_01(ontouml_model: Graph, rule_code: str) -> tuple[list[ResultIssue], list[ResultIssue]]:
+    """Execute rule CL_ST_01 and return its description and results.
 
     :param ontouml_model: The OntoUML model in graph format (using the ontouml-vocabulary) to be validated by the rule.
     :type ontouml_model: Graph
@@ -29,7 +29,7 @@ def execute_rule_CL001(ontouml_model: Graph, rule_code: str) -> tuple[list[Resul
     rule_w_list = []
     rule_e_list = []
 
-    query_answer = ontouml_model.query(QUERY_CL001)
+    query_answer = ontouml_model.query(QUERY_CL_ST_01)
 
     for row in query_answer:
         class_id = row.class_id.toPython()
@@ -48,8 +48,8 @@ def execute_rule_CL001(ontouml_model: Graph, rule_code: str) -> tuple[list[Resul
     return rule_w_list, rule_e_list
 
 
-def execute_rule_CL002(ontouml_model: Graph, rule_code: str) -> tuple[list[ResultIssue], list[ResultIssue]]:
-    """Execute rule CL002 and return its description and results.
+def execute_rule_CL_ST_02(ontouml_model: Graph, rule_code: str) -> tuple[list[ResultIssue], list[ResultIssue]]:
+    """Execute rule CL_ST_02 and return its description and results.
 
     :param ontouml_model: The OntoUML model in graph format (using the ontouml-vocabulary) to be validated by the rule.
     :type ontouml_model: Graph
@@ -65,7 +65,7 @@ def execute_rule_CL002(ontouml_model: Graph, rule_code: str) -> tuple[list[Resul
     rule_w_list = []
     rule_e_list = []
 
-    query_answer = ontouml_model.query(QUERY_CL002)
+    query_answer = ontouml_model.query(QUERY_CL_ST_02)
 
     for row in query_answer:
         class_id = row.class_id.toPython()
@@ -87,8 +87,8 @@ def execute_rule_CL002(ontouml_model: Graph, rule_code: str) -> tuple[list[Resul
     return rule_w_list, rule_e_list
 
 
-def execute_rule_CL003(ontouml_model: Graph, rule_code: str) -> tuple[list[ResultIssue], list[ResultIssue]]:
-    """Execute rule CL003 and return its description and results.
+def execute_rule_CL_EN_01(ontouml_model: Graph, rule_code: str) -> tuple[list[ResultIssue], list[ResultIssue]]:
+    """Execute rule CL_EN_01 and return its description and results.
 
     :param ontouml_model: The OntoUML model in graph format (using the ontouml-vocabulary) to be validated by the rule.
     :type ontouml_model: Graph
@@ -104,7 +104,7 @@ def execute_rule_CL003(ontouml_model: Graph, rule_code: str) -> tuple[list[Resul
     rule_w_list = []
     rule_e_list = []
 
-    query_answer = ontouml_model.query(QUERY_CL003)
+    query_answer = ontouml_model.query(QUERY_CL_EN_01)
 
     for row in query_answer:
         class_id = row.class_id.toPython()
