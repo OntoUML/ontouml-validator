@@ -89,7 +89,7 @@ owa,R_CL_ZGT,R_CL_ZGT_B09.ttl,valid
 cwa,R_CL_ZGT,R_CL_ZGT_B09.ttl,valid
 owa,R_CL_ZGT,R_CL_ZGT_B10.ttl,valid
 cwa,R_CL_ZGT,R_CL_ZGT_B10.ttl,valid
-owa,R_CL_ZGT,R_CL_ZGT_B11.ttl,error
+owa,R_CL_ZGT,R_CL_ZGT_B11.ttl,warning
 cwa,R_CL_ZGT,R_CL_ZGT_B11.ttl,error
 owa,R_CL_ZGT,R_CL_ZGT_B12.ttl,valid
 cwa,R_CL_ZGT,R_CL_ZGT_B12.ttl,valid

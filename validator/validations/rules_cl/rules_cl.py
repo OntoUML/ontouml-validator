@@ -4,7 +4,6 @@ This module provides a collection of functions for executing OntoUML validations
 """
 from rdflib import Graph
 
-from validator.validations.constants import ONTOUML_NAMESPACE, ONTOUML_CLASS_STEREOTYPES
 from validator.validations.result_issue import ResultIssue
 from validator.validations.rules_cl.sparql_cl import (
     QUERY_R_CL_XJZ,
@@ -12,9 +11,19 @@ from validator.validations.rules_cl.sparql_cl import (
     QUERY_R_CL_UMC,
     QUERY_R_CL_AIB,
     QUERY_R_CL_EDA,
-    QUERY_R_CL_ZGT,
     QUERY_R_CL_GJU,
     QUERY_R_CL_BWZ,
+)
+from validator.vocab_lib.globals import (
+    ONTOUML_NAMESPACE,
+    ONTOUML_CLASS_STEREOTYPES,
+    ONTOUML_BASE_SORTALS,
+    ONTOUML_ULTIMATE_SORTALS,
+)
+from validator.vocab_lib.vocab_lib import (
+    get_classes_of_types,
+    get_class_name,
+    get_all_superclasses,
 )
 
 
@@ -217,23 +226,29 @@ def execute_rule_R_CL_ZGT(ontouml_model: Graph, rule_code: str) -> tuple[list[Re
     rule_w_list = []
     rule_e_list = []
 
-    # Return enumeration classes that have attributes
-    query_answer = ontouml_model.query(QUERY_R_CL_ZGT)
+    # Creating a list of all base_sortals and of all ultimate_sortals in the ontology
+    base_sortals = get_classes_of_types(ontouml_model, ONTOUML_BASE_SORTALS)
+    ultimate_sortals = get_classes_of_types(ontouml_model, ONTOUML_ULTIMATE_SORTALS)
 
-    for row in query_answer:
-        class_id = row.class_id.toPython()
-        class_name = row.class_name.value
-        sup_count = row.count.value
+    for base_sortal in base_sortals:
+        base_sortal_sup = get_all_superclasses(ontouml_model, base_sortal)
+        sup_count = 0
+
+        for sup in base_sortal_sup:
+            if sup in ultimate_sortals:
+                sup_count += 1
 
         if sup_count == 0:
+            class_name = get_class_name(ontouml_model, base_sortal)
             issue_description = f"The class '{class_name}' is a base sortal without an ultimate sortal as supertype."
-            issue = ResultIssue(rule_code, rule_definition, issue_description, [class_id])
+            issue = ResultIssue(rule_code, rule_definition, issue_description, [base_sortal])
             rule_w_list.append(issue)
         elif sup_count > 1:
+            class_name = get_class_name(ontouml_model, base_sortal)
             issue_description = (
-                f"The class '{class_name}' is a base sortal with " f"{sup_count} ultimate sortals supertypes."
+                f"The class '{class_name}' is a base sortal with {sup_count} ultimate sortals supertypes."
             )
-            issue = ResultIssue(rule_code, rule_definition, issue_description, [class_id])
+            issue = ResultIssue(rule_code, rule_definition, issue_description, [base_sortal])
             rule_e_list.append(issue)
 
     return rule_w_list, rule_e_list
