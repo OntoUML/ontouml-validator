@@ -1,0 +1,89 @@
+{
+  "id": "wX1qi1GEEWUWQQ3K",
+  "name": "test",
+  "description": null,
+  "type": "Project",
+  "model": {
+    "id": "wX1qi1GEEWUWQQ3K_root",
+    "name": "test",
+    "description": null,
+    "type": "Package",
+    "propertyAssignments": null,
+    "contents": [
+      {
+        "id": "XPNqi1GEEWUWQRGy",
+        "name": "test",
+        "description": null,
+        "type": "Package",
+        "propertyAssignments": null,
+        "contents": [
+          {
+            "id": "TCtqi1GEEWUWQRG5",
+            "name": "TestClass",
+            "description": null,
+            "type": "Class",
+            "propertyAssignments": null,
+            "stereotype": "enumeration",
+            "isAbstract": false,
+            "isDerived": false,
+            "properties": [
+              {
+                "id": "W_Bai1GEEWUWQRHN",
+                "name": "testAttribute",
+                "description": null,
+                "type": "Property",
+                "propertyAssignments": null,
+                "stereotype": null,
+                "isDerived": false,
+                "isReadOnly": false,
+                "isOrdered": false,
+                "cardinality": null,
+                "propertyType": null,
+                "subsettedProperties": null,
+                "redefinedProperties": null,
+                "aggregationKind": "NONE"
+              }
+            ],
+            "isExtensional": null,
+            "isPowertype": null,
+            "order": null,
+            "literals": null,
+            "restrictedTo": [
+              "abstract"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "diagrams": [
+    {
+      "id": "uVNqi1GEEWUWQRGl",
+      "name": "test",
+      "description": null,
+      "type": "Diagram",
+      "owner": {
+        "id": "XPNqi1GEEWUWQRGy",
+        "type": "Package"
+      },
+      "contents": [
+        {
+          "id": "TCtqi1GEEWUWQRG4",
+          "type": "ClassView",
+          "modelElement": {
+            "id": "TCtqi1GEEWUWQRG5",
+            "type": "Class"
+          },
+          "shape": {
+            "id": "TCtqi1GEEWUWQRG4_shape",
+            "type": "Rectangle",
+            "x": 568,
+            "y": 407,
+            "width": 97,
+            "height": 53
+          }
+        }
+      ]
+    }
+  ]
+}

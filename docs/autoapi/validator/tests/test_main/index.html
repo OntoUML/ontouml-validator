@@ -1,229 +1,354 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta charset="utf-8"/>
+    <meta content="Docutils 0.18.1: http://docutils.sourceforge.net/" name="generator"/>
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>validator.tests.test_main &mdash; ontouml-validator  documentation</title>
-      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
-      <link rel="stylesheet" href="../../../../_static/css/sphinx_rtd_size.css" type="text/css" />
-  <!--[if lt IE 9]>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>validator.tests.test_main &mdash; ontouml-validator documentation</title>
+    <link href="../../../../_static/pygments.css" rel="stylesheet" type="text/css"/>
+    <link href="../../../../_static/css/theme.css" rel="stylesheet" type="text/css"/>
+    <link href="../../../../_static/graphviz.css" rel="stylesheet" type="text/css"/>
+    <link href="../../../../_static/css/sphinx_rtd_size.css" rel="stylesheet" type="text/css"/>
+    <!--[if lt IE 9]>
     <script src="../../../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../../_static/documentation_options.js?v=5929fcd5"></script>
-        <script src="../../../../_static/doctools.js?v=888ff710"></script>
-        <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <![endif]-->
+
+    <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+    <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+    <script src="../../../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../../_static/js/theme.js"></script>
-    <link rel="index" title="Index" href="../../../../genindex.html" />
-    <link rel="search" title="Search" href="../../../../search.html" />
-    <link rel="next" title="validator.validations" href="../../validations/index.html" />
-    <link rel="prev" title="validator.tests" href="../index.html" /> 
+    <link href="../../../../genindex.html" rel="index" title="Index"/>
+    <link href="../../../../search.html" rel="search" title="Search"/>
+    <link href="../../validations/index.html" rel="next" title="validator.validations"/>
+    <link href="../index.html" rel="prev" title="validator.tests"/>
 </head>
 
-<body class="wy-body-for-nav"> 
-  <div class="wy-grid-for-nav">
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+    <nav class="wy-nav-side" data-toggle="wy-nav-shift">
+        <div class="wy-side-scroll">
+            <div class="wy-side-nav-search">
 
-          
-          
-          <a href="../../../../index.html" class="icon icon-home">
-            ontouml-validator
-              <img src="../../../../_static/logo-validator-reduced.png" class="logo" alt="Logo"/>
-          </a>
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
-</div>
-        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">API Reference</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="../../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">validator</span></code></a><ul class="current">
-<li class="toctree-l3 current"><a class="reference internal" href="../../index.html#subpackages">Subpackages</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="../../modules/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">validator.modules</span></code></a></li>
-<li class="toctree-l4 current"><a class="reference internal" href="../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">validator.tests</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../validations/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">validator.validations</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="../../index.html#submodules">Submodules</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
 
+                <a class="icon icon-home" href="../../../../index.html">
+                    ontouml-validator
+                    <img alt="Logo" class="logo" src="../../../../_static/logo-validator-reduced.png"/>
+                </a>
+                <div role="search">
+                    <form action="../../../../search.html" class="wy-form" id="rtd-search-form" method="get">
+                        <input aria-label="Search docs" name="q" placeholder="Search docs" type="text"/>
+                        <input name="check_keywords" type="hidden" value="yes"/>
+                        <input name="area" type="hidden" value="default"/>
+                    </form>
+                </div>
+            </div>
+            <div aria-label="Navigation menu" class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation">
+                <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">API
+                        Reference</a>
+                        <ul class="current">
+                            <li class="toctree-l2 current"><a class="reference internal" href="../../index.html"><code
+                                    class="xref py py-mod docutils literal notranslate"><span
+                                    class="pre">validator</span></code></a>
+                                <ul class="current">
+                                    <li class="toctree-l3 current"><a class="reference internal"
+                                                                      href="../../index.html#subpackages">Subpackages</a>
+                                        <ul class="current">
+                                            <li class="toctree-l4"><a class="reference internal"
+                                                                      href="../../modules/index.html"><code
+                                                    class="xref py py-mod docutils literal notranslate"><span
+                                                    class="pre">validator.modules</span></code></a></li>
+                                            <li class="toctree-l4 current"><a class="reference internal"
+                                                                              href="../index.html"><code
+                                                    class="xref py py-mod docutils literal notranslate"><span
+                                                    class="pre">validator.tests</span></code></a></li>
+                                            <li class="toctree-l4"><a class="reference internal"
+                                                                      href="../../validations/index.html"><code
+                                                    class="xref py py-mod docutils literal notranslate"><span
+                                                    class="pre">validator.validations</span></code></a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="toctree-l3"><a class="reference internal"
+                                                              href="../../index.html#submodules">Submodules</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+            </div>
         </div>
-      </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../../../index.html">ontouml-validator</a>
-      </nav>
+    <section class="wy-nav-content-wrap" data-toggle="wy-nav-shift">
+        <nav aria-label="Mobile navigation menu" class="wy-nav-top">
+            <i class="fa fa-bars" data-toggle="wy-nav-top"></i>
+            <a href="../../../../index.html">ontouml-validator</a>
+        </nav>
 
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="Page navigation">
-  <ul class="wy-breadcrumbs">
-      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="../../../index.html">API Reference</a></li>
-          <li class="breadcrumb-item"><a href="../../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">validator</span></code></a></li>
-          <li class="breadcrumb-item"><a href="../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">validator.tests</span></code></a></li>
-      <li class="breadcrumb-item active"><code class="xref py py-mod docutils literal notranslate"><span class="pre">validator.tests.test_main</span></code></li>
-      <li class="wy-breadcrumbs-aside">
-            <a href="../../../../_sources/autoapi/validator/tests/test_main/index.rst.txt" rel="nofollow"> View page source</a>
-      </li>
-  </ul>
-  <hr/>
-</div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
-             
-  <section id="module-validator.tests.test_main">
-<span id="validator-tests-test-main"></span><h1><a class="reference internal" href="#module-validator.tests.test_main" title="validator.tests.test_main"><code class="xref py py-mod docutils literal notranslate"><span class="pre">validator.tests.test_main</span></code></a><a class="headerlink" href="#module-validator.tests.test_main" title="Link to this heading"></a></h1>
-<p>This script is used to perform tests on the ontouml-validator using pytest.</p>
-<p>A list of tests is read from the file tests_list.csv and each test is individually performed.</p>
-<section id="module-contents">
-<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
-<section id="functions">
-<h3>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h3>
-<table class="autosummary longtable docutils align-default">
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#validator.tests.test_main.get_test_list" title="validator.tests.test_main.get_test_list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_test_list</span></code></a>()</p></td>
-<td><p>Loads information about test test_files from csv and creates a list of tuples with tests' information.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#validator.tests.test_main.test_all" title="validator.tests.test_main.test_all"><code class="xref py py-obj docutils literal notranslate"><span class="pre">test_all</span></code></a>(assumption, rule_code, input_file, ...)</p></td>
-<td><p>Executes the validator in a received input file and checks if the execution result matches the expected value.</p></td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="attributes">
-<h3>Attributes<a class="headerlink" href="#attributes" title="Link to this heading"></a></h3>
-<table class="autosummary longtable docutils align-default">
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#validator.tests.test_main.package_dir" title="validator.tests.test_main.package_dir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">package_dir</span></code></a></p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#validator.tests.test_main.test_files_dir" title="validator.tests.test_main.test_files_dir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">test_files_dir</span></code></a></p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#validator.tests.test_main.file_path" title="validator.tests.test_main.file_path"><code class="xref py py-obj docutils literal notranslate"><span class="pre">file_path</span></code></a></p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#validator.tests.test_main.LIST_OF_TESTS" title="validator.tests.test_main.LIST_OF_TESTS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LIST_OF_TESTS</span></code></a></p></td>
-<td><p></p></td>
-</tr>
-</tbody>
-</table>
-<dl class="py data">
-<dt class="sig sig-object py" id="validator.tests.test_main.package_dir">
-<span class="sig-prename descclassname"><span class="pre">validator.tests.test_main.</span></span><span class="sig-name descname"><span class="pre">package_dir</span></span><a class="headerlink" href="#validator.tests.test_main.package_dir" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+        <div class="wy-nav-content">
+            <div class="rst-content">
+                <div aria-label="Page navigation" role="navigation">
+                    <ul class="wy-breadcrumbs">
+                        <li><a aria-label="Home" class="icon icon-home" href="../../../../index.html"></a></li>
+                        <li class="breadcrumb-item"><a href="../../../index.html">API Reference</a></li>
+                        <li class="breadcrumb-item"><a href="../../index.html"><code
+                                class="xref py py-mod docutils literal notranslate"><span
+                                class="pre">validator</span></code></a></li>
+                        <li class="breadcrumb-item"><a href="../index.html"><code
+                                class="xref py py-mod docutils literal notranslate"><span
+                                class="pre">validator.tests</span></code></a></li>
+                        <li class="breadcrumb-item active"><code
+                                class="xref py py-mod docutils literal notranslate"><span class="pre">validator.tests.test_main</span></code>
+                        </li>
+                        <li class="wy-breadcrumbs-aside">
+                            <a href="../../../../_sources/autoapi/validator/tests/test_main/index.rst.txt"
+                               rel="nofollow"> View page source</a>
+                        </li>
+                    </ul>
+                    <hr/>
+                </div>
+                <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+                    <div itemprop="articleBody">
 
-<dl class="py data">
-<dt class="sig sig-object py" id="validator.tests.test_main.test_files_dir">
-<span class="sig-prename descclassname"><span class="pre">validator.tests.test_main.</span></span><span class="sig-name descname"><span class="pre">test_files_dir</span></span><a class="headerlink" href="#validator.tests.test_main.test_files_dir" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+                        <section id="module-validator.tests.test_main">
+                            <span id="validator-tests-test-main"></span>
+                            <h1><a class="reference internal" href="#module-validator.tests.test_main"
+                                   title="validator.tests.test_main"><code
+                                    class="xref py py-mod docutils literal notranslate"><span class="pre">validator.tests.test_main</span></code></a><a
+                                    class="headerlink" href="#module-validator.tests.test_main"
+                                    title="Link to this heading"></a></h1>
+                            <p>This script is used to perform tests on the ontouml-validator using pytest.</p>
+                            <p>A list of tests is read from the file tests_list.csv and each test is individually
+                                performed.</p>
+                            <section id="module-contents">
+                                <h2>Module Contents<a class="headerlink" href="#module-contents"
+                                                      title="Link to this heading"></a></h2>
+                                <section id="functions">
+                                    <h3>Functions<a class="headerlink" href="#functions"
+                                                    title="Link to this heading"></a></h3>
+                                    <table class="autosummary longtable docutils align-default">
+                                        <tbody>
+                                        <tr class="row-odd">
+                                            <td><p><a class="reference internal"
+                                                      href="#validator.tests.test_main.get_test_list"
+                                                      title="validator.tests.test_main.get_test_list"><code
+                                                    class="xref py py-obj docutils literal notranslate"><span
+                                                    class="pre">get_test_list</span></code></a>()</p></td>
+                                            <td><p>Loads information about test test_files from csv and creates a list
+                                                of tuples with tests' information.</p></td>
+                                        </tr>
+                                        <tr class="row-even">
+                                            <td><p><a class="reference internal"
+                                                      href="#validator.tests.test_main.test_all"
+                                                      title="validator.tests.test_main.test_all"><code
+                                                    class="xref py py-obj docutils literal notranslate"><span
+                                                    class="pre">test_all</span></code></a>(assumption, rule_code, input_file, ...)
+                                            </p></td>
+                                            <td><p>Executes the validator in a received input file and checks if the
+                                                execution result matches the expected value.</p></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </section>
+                                <section id="attributes">
+                                    <h3>Attributes<a class="headerlink" href="#attributes" title="Link to this heading"></a>
+                                    </h3>
+                                    <table class="autosummary longtable docutils align-default">
+                                        <tbody>
+                                        <tr class="row-odd">
+                                            <td><p><a class="reference internal"
+                                                      href="#validator.tests.test_main.package_dir"
+                                                      title="validator.tests.test_main.package_dir"><code
+                                                    class="xref py py-obj docutils literal notranslate"><span
+                                                    class="pre">package_dir</span></code></a></p></td>
+                                            <td><p></p></td>
+                                        </tr>
+                                        <tr class="row-even">
+                                            <td><p><a class="reference internal"
+                                                      href="#validator.tests.test_main.test_files_dir"
+                                                      title="validator.tests.test_main.test_files_dir"><code
+                                                    class="xref py py-obj docutils literal notranslate"><span
+                                                    class="pre">test_files_dir</span></code></a></p></td>
+                                            <td><p></p></td>
+                                        </tr>
+                                        <tr class="row-odd">
+                                            <td><p><a class="reference internal"
+                                                      href="#validator.tests.test_main.file_path"
+                                                      title="validator.tests.test_main.file_path"><code
+                                                    class="xref py py-obj docutils literal notranslate"><span
+                                                    class="pre">file_path</span></code></a></p></td>
+                                            <td><p></p></td>
+                                        </tr>
+                                        <tr class="row-even">
+                                            <td><p><a class="reference internal"
+                                                      href="#validator.tests.test_main.LIST_OF_TESTS"
+                                                      title="validator.tests.test_main.LIST_OF_TESTS"><code
+                                                    class="xref py py-obj docutils literal notranslate"><span
+                                                    class="pre">LIST_OF_TESTS</span></code></a></p></td>
+                                            <td><p></p></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <dl class="py data">
+                                        <dt class="sig sig-object py" id="validator.tests.test_main.package_dir">
+                                            <span class="sig-prename descclassname"><span class="pre">validator.tests.test_main.</span></span><span
+                                                class="sig-name descname"><span class="pre">package_dir</span></span><a
+                                                class="headerlink" href="#validator.tests.test_main.package_dir"
+                                                title="Link to this definition"></a></dt>
+                                        <dd></dd>
+                                    </dl>
 
-<dl class="py data">
-<dt class="sig sig-object py" id="validator.tests.test_main.file_path">
-<span class="sig-prename descclassname"><span class="pre">validator.tests.test_main.</span></span><span class="sig-name descname"><span class="pre">file_path</span></span><a class="headerlink" href="#validator.tests.test_main.file_path" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+                                    <dl class="py data">
+                                        <dt class="sig sig-object py" id="validator.tests.test_main.test_files_dir">
+                                            <span class="sig-prename descclassname"><span class="pre">validator.tests.test_main.</span></span><span
+                                                class="sig-name descname"><span class="pre">test_files_dir</span></span><a
+                                                class="headerlink" href="#validator.tests.test_main.test_files_dir"
+                                                title="Link to this definition"></a></dt>
+                                        <dd></dd>
+                                    </dl>
 
-<dl class="py function">
-<dt class="sig sig-object py" id="validator.tests.test_main.get_test_list">
-<span class="sig-prename descclassname"><span class="pre">validator.tests.test_main.</span></span><span class="sig-name descname"><span class="pre">get_test_list</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#validator.tests.test_main.get_test_list" title="Link to this definition"></a></dt>
-<dd><p>Loads information about test test_files from csv and creates a list of tuples with tests’ information.
-Note: the input file does not have a header.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><p>The returned tuples’ content is:
-[0] (str) world-assumption to be used in the test. Valid values are “cwa” and “owa”.
-[1] (str) input file name: name of the input file to be tested.
-[2] (str) expected result: indicates if the result is expected to be:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>’valid’: valid</p></li>
-<li><p>’warning’: invalid and generate a warning</p></li>
-<li><p>’error’: invalid and generate an error</p></li>
-</ul>
-</div></blockquote>
-</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>list[tuple[str,str,str]]</p>
-</dd>
-</dl>
-</dd></dl>
+                                    <dl class="py data">
+                                        <dt class="sig sig-object py" id="validator.tests.test_main.file_path">
+                                            <span class="sig-prename descclassname"><span class="pre">validator.tests.test_main.</span></span><span
+                                                class="sig-name descname"><span class="pre">file_path</span></span><a
+                                                class="headerlink" href="#validator.tests.test_main.file_path"
+                                                title="Link to this definition"></a></dt>
+                                        <dd></dd>
+                                    </dl>
 
-<dl class="py data">
-<dt class="sig sig-object py" id="validator.tests.test_main.LIST_OF_TESTS">
-<span class="sig-prename descclassname"><span class="pre">validator.tests.test_main.</span></span><span class="sig-name descname"><span class="pre">LIST_OF_TESTS</span></span><a class="headerlink" href="#validator.tests.test_main.LIST_OF_TESTS" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+                                    <dl class="py function">
+                                        <dt class="sig sig-object py" id="validator.tests.test_main.get_test_list">
+                                            <span class="sig-prename descclassname"><span class="pre">validator.tests.test_main.</span></span><span
+                                                class="sig-name descname"><span
+                                                class="pre">get_test_list</span></span><span
+                                                class="sig-paren">(</span><span class="sig-paren">)</span><a
+                                                class="headerlink" href="#validator.tests.test_main.get_test_list"
+                                                title="Link to this definition"></a></dt>
+                                        <dd><p>Loads information about test test_files from csv and creates a list of
+                                            tuples with tests’ information.
+                                            Note: the input file does not have a header.</p>
+                                            <dl class="field-list simple">
+                                                <dt class="field-odd">Returns<span class="colon">:</span></dt>
+                                                <dd class="field-odd"><p>
+                                                    <p>The returned tuples’ content is:
+                                                        [0] (str) world-assumption to be used in the test. Valid values
+                                                        are “cwa” and “owa”.
+                                                        [1] (str) input file name: name of the input file to be tested.
+                                                        [2] (str) expected result: indicates if the result is expected
+                                                        to be:</p>
+                                                    <blockquote>
+                                                        <div>
+                                                            <ul class="simple">
+                                                                <li><p>’valid’: valid</p></li>
+                                                                <li><p>’warning’: invalid and generate a warning</p>
+                                                                </li>
+                                                                <li><p>’error’: invalid and generate an error</p></li>
+                                                            </ul>
+                                                        </div>
+                                                    </blockquote>
+                                                    </p>
+                                                </dd>
+                                                <dt class="field-even">Return type<span class="colon">:</span></dt>
+                                                <dd class="field-even"><p>list[tuple[str,str,str]]</p>
+                                                </dd>
+                                            </dl>
+                                        </dd>
+                                    </dl>
 
-<dl class="py function">
-<dt class="sig sig-object py" id="validator.tests.test_main.test_all">
-<span class="sig-prename descclassname"><span class="pre">validator.tests.test_main.</span></span><span class="sig-name descname"><span class="pre">test_all</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">assumption</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rule_code</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expected_result</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#validator.tests.test_main.test_all" title="Link to this definition"></a></dt>
-<dd><p>Executes the validator in a received input file and checks if the execution result matches the expected value.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>assumption</strong> (<em>str</em>) – Indicates the world-assumption to be used in test execution. Valid values are: ‘cwa’ and ‘owa’.</p></li>
-<li><p><strong>rule_code</strong> (<em>str</em>) – The code of the validation rule to be tested.</p></li>
-<li><p><strong>input_file</strong> (<em>str</em>) – Path to an input file that is going to be validated as a test.</p></li>
-<li><p><strong>expected_result</strong> (<em>int</em>) – Indicates the test’s expected result, which can be one of the following:
-- ‘valid’: The evaluation result is expected to be valid.
-- ‘warning’: The evaluation result is expected to generate a warning.
-- ‘error’: The evaluation result is expected to generate an error.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
+                                    <dl class="py data">
+                                        <dt class="sig sig-object py" id="validator.tests.test_main.LIST_OF_TESTS">
+                                            <span class="sig-prename descclassname"><span class="pre">validator.tests.test_main.</span></span><span
+                                                class="sig-name descname"><span
+                                                class="pre">LIST_OF_TESTS</span></span><a class="headerlink"
+                                                                                          href="#validator.tests.test_main.LIST_OF_TESTS"
+                                                                                          title="Link to this definition"></a>
+                                        </dt>
+                                        <dd></dd>
+                                    </dl>
 
-</section>
-</section>
-</section>
+                                    <dl class="py function">
+                                        <dt class="sig sig-object py" id="validator.tests.test_main.test_all">
+                                            <span class="sig-prename descclassname"><span class="pre">validator.tests.test_main.</span></span><span
+                                                class="sig-name descname"><span class="pre">test_all</span></span><span
+                                                class="sig-paren">(</span><em class="sig-param"><span class="n"><span
+                                                class="pre">assumption</span></span></em>, <em class="sig-param"><span
+                                                class="n"><span class="pre">rule_code</span></span></em>, <em
+                                                class="sig-param"><span class="n"><span
+                                                class="pre">input_file</span></span></em>, <em class="sig-param"><span
+                                                class="n"><span class="pre">expected_result</span></span></em><span
+                                                class="sig-paren">)</span><a class="headerlink"
+                                                                             href="#validator.tests.test_main.test_all"
+                                                                             title="Link to this definition"></a></dt>
+                                        <dd><p>Executes the validator in a received input file and checks if the
+                                            execution result matches the expected value.</p>
+                                            <dl class="field-list simple">
+                                                <dt class="field-odd">Parameters<span class="colon">:</span></dt>
+                                                <dd class="field-odd">
+                                                    <ul class="simple">
+                                                        <li><p><strong>assumption</strong> (<em>str</em>) – Indicates
+                                                            the world-assumption to be used in test execution. Valid
+                                                            values are: ‘cwa’ and ‘owa’.</p></li>
+                                                        <li><p><strong>rule_code</strong> (<em>str</em>) – The code of
+                                                            the validation rule to be tested.</p></li>
+                                                        <li><p><strong>input_file</strong> (<em>str</em>) – Path to an
+                                                            input file that is going to be validated as a test.</p></li>
+                                                        <li><p><strong>expected_result</strong> (<em>int</em>) –
+                                                            Indicates the test’s expected result, which can be one of
+                                                            the following:
+                                                            - ‘valid’: The evaluation result is expected to be valid.
+                                                            - ‘warning’: The evaluation result is expected to generate a
+                                                            warning.
+                                                            - ‘error’: The evaluation result is expected to generate an
+                                                            error.</p></li>
+                                                    </ul>
+                                                </dd>
+                                            </dl>
+                                        </dd>
+                                    </dl>
+
+                                </section>
+                            </section>
+                        </section>
 
 
-           </div>
-          </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../index.html" class="btn btn-neutral float-left" title="validator.tests" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../../validations/index.html" class="btn btn-neutral float-right" title="validator.validations" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
+                    </div>
+                </div>
+                <footer>
+                    <div aria-label="Footer" class="rst-footer-buttons" role="navigation">
+                        <a accesskey="p" class="btn btn-neutral float-left" href="../index.html" rel="prev"
+                           title="validator.tests"><span aria-hidden="true" class="fa fa-arrow-circle-left"></span> Previous</a>
+                        <a accesskey="n" class="btn btn-neutral float-right"
+                           href="../../validations/index.html" rel="next" title="validator.validations">Next <span
+                                aria-hidden="true" class="fa fa-arrow-circle-right"></span></a>
+                    </div>
 
-  <hr/>
+                    <hr/>
 
-  <div role="contentinfo">
-    <p>&#169; Copyright 2023, Semantics, Cybersecurity &amp; Services (SCS), University of Twente, the Netherlands.</p>
-  </div>
+                    <div role="contentinfo">
+                        <p>&#169; Copyright 2023, Semantics, Cybersecurity &amp; Services (SCS), University of Twente,
+                            the Netherlands.</p>
+                    </div>
 
-  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    provided by <a href="https://readthedocs.org">Read the Docs</a>.
-   
+                    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+                    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+                    provided by <a href="https://readthedocs.org">Read the Docs</a>.
 
-</footer>
+
+                </footer>
+            </div>
         </div>
-      </div>
     </section>
-  </div>
-  <script>
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script> 
+</div>
+<script>
+    jQuery(function () {
+        SphinxRtdTheme.Navigation.enable(true);
+    });
+</script>
 
 </body>
 </html>

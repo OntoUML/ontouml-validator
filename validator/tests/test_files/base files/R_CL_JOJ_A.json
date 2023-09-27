@@ -1,0 +1,70 @@
+{
+  "id": "wX1qi1GEEWUWQQ3K",
+  "name": "test",
+  "description": null,
+  "type": "Project",
+  "model": {
+    "id": "wX1qi1GEEWUWQQ3K_root",
+    "name": "test",
+    "description": null,
+    "type": "Package",
+    "propertyAssignments": null,
+    "contents": [
+      {
+        "id": "XPNqi1GEEWUWQRGy",
+        "name": "test",
+        "description": null,
+        "type": "Package",
+        "propertyAssignments": null,
+        "contents": [
+          {
+            "id": "TCtqi1GEEWUWQRG5",
+            "name": "TestClass",
+            "description": null,
+            "type": "Class",
+            "propertyAssignments": null,
+            "stereotype": null,
+            "isAbstract": false,
+            "isDerived": false,
+            "properties": null,
+            "isExtensional": null,
+            "isPowertype": null,
+            "order": null,
+            "literals": null,
+            "restrictedTo": null
+          }
+        ]
+      }
+    ]
+  },
+  "diagrams": [
+    {
+      "id": "uVNqi1GEEWUWQRGl",
+      "name": "test",
+      "description": null,
+      "type": "Diagram",
+      "owner": {
+        "id": "XPNqi1GEEWUWQRGy",
+        "type": "Package"
+      },
+      "contents": [
+        {
+          "id": "TCtqi1GEEWUWQRG4",
+          "type": "ClassView",
+          "modelElement": {
+            "id": "TCtqi1GEEWUWQRG5",
+            "type": "Class"
+          },
+          "shape": {
+            "id": "TCtqi1GEEWUWQRG4_shape",
+            "type": "Rectangle",
+            "x": 568,
+            "y": 407,
+            "width": 80,
+            "height": 40
+          }
+        }
+      ]
+    }
+  ]
+}

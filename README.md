@@ -14,7 +14,6 @@
 ![Website](https://img.shields.io/website/http/ontouml.github.io/ontouml-validator.svg)
 ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/ontouml/ontouml-validator/code_testing.yml)
 
-
 # ontouml-validator
 
 <p align="center"><img src="https://raw.githubusercontent.com/OntoUML/ontouml-validator/main/validator/resources/logo-validator.png" width="740"></p>
