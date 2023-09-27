@@ -13,6 +13,7 @@ WHERE {
 }
 """
 )
+
 QUERY_R_CL_JOJ = (
     ONTOUML_SPARQL_PREFIX
     + """
@@ -25,6 +26,7 @@ WHERE {
 }
 """
 )
+
 QUERY_R_CL_UMC = (
     ONTOUML_SPARQL_PREFIX
     + """
@@ -35,6 +37,7 @@ WHERE {
     OPTIONAL { ?class_id ontouml:literal ?class_lt . }
 } GROUP BY ?class_id """
 )
+
 QUERY_R_CL_AIB = (
     ONTOUML_SPARQL_PREFIX
     + """
@@ -47,6 +50,7 @@ WHERE {
 }
 """
 )
+
 QUERY_R_CL_EDA = (
     ONTOUML_SPARQL_PREFIX
     + """
@@ -63,7 +67,6 @@ WHERE {
 """
 )
 
-
 QUERY_R_CL_GJU = (
     ONTOUML_SPARQL_PREFIX
     + """
@@ -74,6 +77,7 @@ WHERE {
     OPTIONAL {?class_id ontouml:stereotype ?class_st .}
 } GROUP BY ?class_id """
 )
+
 QUERY_R_CL_BWZ = (
     ONTOUML_SPARQL_PREFIX
     + """
@@ -83,4 +87,19 @@ WHERE {
     ?class_id ontouml:name ?class_name .
     OPTIONAL {?class_id ontouml:stereotype ?class_st .}
 } """
+)
+
+QUERY_R_CL_YOK = (
+    ONTOUML_SPARQL_PREFIX
+    + """
+SELECT ?class_id ?class_name ?class_st
+WHERE {
+  ?class_id a ontouml:Class ;
+         ontouml:name ?class_name ;
+         ontouml:stereotype ?class_st ;
+         ontouml:isAbstract false .
+  FILTER (?class_st IN (ontouml:category, ontouml:historicalRoleMixin, ontouml:mixin,
+                        ontouml:phaseMixin, ontouml:roleMixin))
+}
+"""
 )

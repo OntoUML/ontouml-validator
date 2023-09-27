@@ -183,3 +183,15 @@ owa,R_CL_ZGT,R_CL_ZGT_U18.ttl,valid
 cwa,R_CL_ZGT,R_CL_ZGT_U18.ttl,valid
 owa,R_CL_ZGT,R_CL_ZGT_U19.ttl,valid
 cwa,R_CL_ZGT,R_CL_ZGT_U19.ttl,valid
+owa,R_CL_YOK,R_CL_YOK_A.ttl,valid
+cwa,R_CL_YOK,R_CL_YOK_A.ttl,valid
+owa,R_CL_YOK,R_CL_YOK_B.ttl,valid
+cwa,R_CL_YOK,R_CL_YOK_B.ttl,valid
+owa,R_CL_YOK,R_CL_YOK_C.ttl,valid
+cwa,R_CL_YOK,R_CL_YOK_C.ttl,valid
+owa,R_CL_YOK,R_CL_YOK_D.ttl,valid
+cwa,R_CL_YOK,R_CL_YOK_D.ttl,valid
+owa,R_CL_YOK,R_CL_YOK_E.ttl,warning
+cwa,R_CL_YOK,R_CL_YOK_E.ttl,error
+owa,R_CL_YOK,R_CL_YOK_F.ttl,valid
+cwa,R_CL_YOK,R_CL_YOK_F.ttl,valid

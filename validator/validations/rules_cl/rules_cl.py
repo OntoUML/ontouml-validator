@@ -13,6 +13,7 @@ from validator.validations.rules_cl.sparql_cl import (
     QUERY_R_CL_EDA,
     QUERY_R_CL_GJU,
     QUERY_R_CL_BWZ,
+    QUERY_R_CL_YOK,
 )
 from validator.vocab_lib.globals import (
     ONTOUML_NAMESPACE,
@@ -327,5 +328,39 @@ def execute_rule_R_CL_BWZ(ontouml_model: Graph, rule_code: str) -> tuple[list[Re
                 )
                 issue = ResultIssue(rule_code, rule_definition, issue_description, [class_id])
                 rule_e_list.append(issue)
+
+    return rule_w_list, rule_e_list
+
+
+def execute_rule_R_CL_YOK(ontouml_model: Graph, rule_code: str) -> tuple[list[ResultIssue], list[ResultIssue]]:
+    """Execute rule R_CL_YOK and return its description and results.
+
+    :param ontouml_model: The OntoUML model in graph format (using the ontouml-vocabulary) to be validated by the rule.
+    :type ontouml_model: Graph
+    :param rule_code: Code of this rule.
+    :type rule_code: str
+    :return: A tuple with two components:
+        - A list of all warnings (as a ResultIssue object) found during the specific rule's validation process.
+        - A list of all errors (as a ResultIssue object) found during the specific rule's validation process.
+    :rtype: tuple[list[ResultIssue], list[ResultIssue]]
+    """
+    rule_definition = "Every class decorated with a non-sortal stereotype must be abstract."
+
+    rule_w_list = []
+    rule_e_list = []
+
+    # Returns every non-sortal class that has its attribute isAbstract set to false
+    query_answer = ontouml_model.query(QUERY_R_CL_YOK)
+
+    for row in query_answer:
+        class_id = row.class_id.toPython()
+        class_name = row.class_name.toPython()
+        class_st = row.class_st.toPython()
+
+        issue_description = (
+            f"The non-sortal ('{class_st}') class '{class_name}' " f"has isAbstract attribute set to 'false'."
+        )
+        issue = ResultIssue(rule_code, rule_definition, issue_description, [class_id])
+        rule_w_list.append(issue)
 
     return rule_w_list, rule_e_list
