@@ -15,11 +15,11 @@ from validator.validations.rules_cl.sparql_cl import (
     QUERY_R_CL_BWZ,
     QUERY_R_CL_YOK,
 )
+from validator.vocab_lib.ONTOUML import ONTOUML
 from validator.vocab_lib.globals import (
-    ONTOUML_NAMESPACE,
     ONTOUML_CLASS_STEREOTYPES,
-    ONTOUML_BASE_SORTALS,
-    ONTOUML_ULTIMATE_SORTALS,
+    ONTOUML_ST_BASE_SORTALS,
+    ONTOUML_ST_ULTIMATE_SORTALS,
 )
 from validator.vocab_lib.vocab_lib import (
     get_classes_of_types,
@@ -94,7 +94,7 @@ def execute_rule_R_CL_JOJ(ontouml_model: Graph, rule_code: str) -> tuple[list[Re
         # Class with stereotype different from enumeration and with enumeration literals
         else:
             class_st = row.class_st.toPython()
-            if class_st != (ONTOUML_NAMESPACE + "enumeration"):
+            if class_st != (ONTOUML.enumeration):
                 issue_description = (
                     f"The class '{class_name}' is stereotyped as '{class_st}' but has enumeration literal(s)."
                 )
@@ -228,8 +228,8 @@ def execute_rule_R_CL_ZGT(ontouml_model: Graph, rule_code: str) -> tuple[list[Re
     rule_e_list = []
 
     # Creating a list of all base_sortals and of all ultimate_sortals in the ontology
-    base_sortals = get_classes_of_types(ontouml_model, ONTOUML_BASE_SORTALS)
-    ultimate_sortals = get_classes_of_types(ontouml_model, ONTOUML_ULTIMATE_SORTALS)
+    base_sortals = get_classes_of_types(ontouml_model, ONTOUML_ST_BASE_SORTALS)
+    ultimate_sortals = get_classes_of_types(ontouml_model, ONTOUML_ST_ULTIMATE_SORTALS)
 
     for base_sortal in base_sortals:
         base_sortal_sup = get_all_superclasses(ontouml_model, base_sortal)

@@ -1,98 +1,85 @@
 """Constants to be used globally in the code."""
+from validator.vocab_lib.ONTOUML import ONTOUML
 
 ONTOUML_SPARQL_PREFIX = "PREFIX ontouml: <https://w3id.org/ontouml#> "
 
-ONTOUML_NAMESPACE = "https://w3id.org/ontouml#"
-
 ONTOUML_CLASS_STEREOTYPES = [
-    "https://w3id.org/ontouml#abstract",
-    "https://w3id.org/ontouml#category",
-    "https://w3id.org/ontouml#collective",
-    "https://w3id.org/ontouml#datatype",
-    "https://w3id.org/ontouml#enumeration",
-    "https://w3id.org/ontouml#event",
-    "https://w3id.org/ontouml#historicalRole",
-    "https://w3id.org/ontouml#historicalRoleMixin",
-    "https://w3id.org/ontouml#kind",
-    "https://w3id.org/ontouml#mixin",
-    "https://w3id.org/ontouml#mode",
-    "https://w3id.org/ontouml#phase",
-    "https://w3id.org/ontouml#phaseMixin",
-    "https://w3id.org/ontouml#quality",
-    "https://w3id.org/ontouml#quantity",
-    "https://w3id.org/ontouml#relator",
-    "https://w3id.org/ontouml#role",
-    "https://w3id.org/ontouml#roleMixin",
-    "https://w3id.org/ontouml#situation",
-    "https://w3id.org/ontouml#subkind",
-    "https://w3id.org/ontouml#type",
+    ONTOUML.abstract,
+    ONTOUML.category,
+    ONTOUML.collective,
+    ONTOUML.datatype,
+    ONTOUML.enumeration,
+    ONTOUML.event,
+    ONTOUML.historicalRole,
+    ONTOUML.historicalRoleMixin,
+    ONTOUML.kind,
+    ONTOUML.mixin,
+    ONTOUML.mode,
+    ONTOUML.phase,
+    ONTOUML.phaseMixin,
+    ONTOUML.quality,
+    ONTOUML.quantity,
+    ONTOUML.relator,
+    ONTOUML.role,
+    ONTOUML.roleMixin,
+    ONTOUML.situation,
+    ONTOUML.subkind,
+    ONTOUML.type,
 ]
 
-ONTOUML_BASE_SORTALS = [
-    "https://w3id.org/ontouml#historicalRole",
-    "https://w3id.org/ontouml#phase",
-    "https://w3id.org/ontouml#role",
-    "https://w3id.org/ontouml#subkind",
+ONTOUML_ST_BASE_SORTALS = [
+    ONTOUML.historicalRole,
+    ONTOUML.phase,
+    ONTOUML.role,
+    ONTOUML.subkind,
 ]
 
-ONTOUML_ULTIMATE_SORTALS = [
-    "https://w3id.org/ontouml#collective",
-    "https://w3id.org/ontouml#kind",
-    "https://w3id.org/ontouml#mode",
-    "https://w3id.org/ontouml#quality",
-    "https://w3id.org/ontouml#quantity",
-    "https://w3id.org/ontouml#relator",
-    "https://w3id.org/ontouml#type",
+ONTOUML_ST_ULTIMATE_SORTALS = [
+    ONTOUML.collective,
+    ONTOUML.kind,
+    ONTOUML.mode,
+    ONTOUML.quality,
+    ONTOUML.quantity,
+    ONTOUML.relator,
+    ONTOUML.type,
 ]
 
-ONTOUML_SORTALS = [
-    "https://w3id.org/ontouml#collective",
-    "https://w3id.org/ontouml#historicalRole",
-    "https://w3id.org/ontouml#kind",
-    "https://w3id.org/ontouml#mode",
-    "https://w3id.org/ontouml#phase",
-    "https://w3id.org/ontouml#quality",
-    "https://w3id.org/ontouml#quantity",
-    "https://w3id.org/ontouml#relator",
-    "https://w3id.org/ontouml#role",
-    "https://w3id.org/ontouml#subkind",
-    "https://w3id.org/ontouml#type",
-]
+ONTOUML_ST_SORTALS = ONTOUML_ST_BASE_SORTALS + ONTOUML_ST_ULTIMATE_SORTALS
 
-ONTOUML_NON_SORTALS = [
-    "https://w3id.org/ontouml#category",
-    "https://w3id.org/ontouml#historicalRoleMixin",
-    "https://w3id.org/ontouml#mixin",
-    "https://w3id.org/ontouml#phaseMixin",
-    "https://w3id.org/ontouml#roleMixin",
+ONTOUML_ST_NON_SORTALS = [
+    ONTOUML.category,
+    ONTOUML.historicalRoleMixin,
+    ONTOUML.mixin,
+    ONTOUML.phaseMixin,
+    ONTOUML.roleMixin,
 ]
 
 ONTOUML_ST_ABSTRACTS = [
-    "https://w3id.org/ontouml#abstract",
-    "https://w3id.org/ontouml#datatype",
-    "https://w3id.org/ontouml#enumeration",
+    ONTOUML.abstract,
+    ONTOUML.datatype,
+    ONTOUML.enumeration,
 ]
 
 ONTOUML_ST_RIGIDS = [
-    "https://w3id.org/ontouml#category",
-    "https://w3id.org/ontouml#collective",
-    "https://w3id.org/ontouml#kind",
-    "https://w3id.org/ontouml#mode",
-    "https://w3id.org/ontouml#quality",
-    "https://w3id.org/ontouml#quantity",
-    "https://w3id.org/ontouml#relator",
-    "https://w3id.org/ontouml#subkind",
+    ONTOUML.category,
+    ONTOUML.collective,
+    ONTOUML.kind,
+    ONTOUML.mode,
+    ONTOUML.quality,
+    ONTOUML.quantity,
+    ONTOUML.relator,
+    ONTOUML.subkind,
 ]
 
-ONTOUML_ST_ANTI_RIGIDS = [
-    "https://w3id.org/ontouml#historicalRole",
-    "https://w3id.org/ontouml#historicalRoleMixin",
-    "https://w3id.org/ontouml#phase",
-    "https://w3id.org/ontouml#phaseMixin",
-    "https://w3id.org/ontouml#role",
-    "https://w3id.org/ontouml#roleMixin",
+ST_ANTI_RIGIDS = [
+    ONTOUML.historicalRole,
+    ONTOUML.historicalRoleMixin,
+    ONTOUML.phase,
+    ONTOUML.phaseMixin,
+    ONTOUML.role,
+    ONTOUML.roleMixin,
 ]
 
 ONTOUML_ST_SEMI_RIGIDS = [
-    "https://w3id.org/ontouml#mixin",
+    ONTOUML.mixin,
 ]

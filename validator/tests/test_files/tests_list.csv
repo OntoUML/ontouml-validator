@@ -191,7 +191,7 @@ owa,R_CL_YOK,R_CL_YOK_C.ttl,valid
 cwa,R_CL_YOK,R_CL_YOK_C.ttl,valid
 owa,R_CL_YOK,R_CL_YOK_D.ttl,valid
 cwa,R_CL_YOK,R_CL_YOK_D.ttl,valid
-owa,R_CL_YOK,R_CL_YOK_E.ttl,warning
+owa,R_CL_YOK,R_CL_YOK_E.ttl,error
 cwa,R_CL_YOK,R_CL_YOK_E.ttl,error
 owa,R_CL_YOK,R_CL_YOK_F.ttl,valid
 cwa,R_CL_YOK,R_CL_YOK_F.ttl,valid

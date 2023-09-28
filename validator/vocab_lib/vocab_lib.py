@@ -1,7 +1,7 @@
 """Library for manipulating ontouml-vocabulary."""
 from rdflib import Graph, URIRef, RDF
 
-from validator.vocab_lib.globals import ONTOUML_NAMESPACE
+from validator.vocab_lib.ONTOUML import ONTOUML
 
 
 def get_direct_superclasses(ontouml_model: Graph, ontouml_class: str, type_restr_list: list[str] = []) -> list[str]:
@@ -22,8 +22,8 @@ def get_direct_superclasses(ontouml_model: Graph, ontouml_class: str, type_restr
     """
     onto_class = URIRef(ontouml_class)
     superclasses = []
-    specific = URIRef(ONTOUML_NAMESPACE + "specific")
-    general = URIRef(ONTOUML_NAMESPACE + "general")
+    specific = URIRef(ONTOUML.specific)
+    general = URIRef(ONTOUML.general)
 
     for gen in ontouml_model.subjects(specific, onto_class):
         for superclass in ontouml_model.objects(gen, general):
@@ -71,8 +71,8 @@ def get_classes_of_types(ontouml_model: Graph, type_restr_list: list[str]) -> li
     :rtype: list[str]
     """
     list_classes = []
-    uri_ontouml_class = URIRef(ONTOUML_NAMESPACE + "Class")
-    uri_stereotype = URIRef(ONTOUML_NAMESPACE + "stereotype")
+    uri_ontouml_class = URIRef(ONTOUML.Class)
+    uri_stereotype = URIRef(ONTOUML.stereotype)
 
     for onto_class in ontouml_model.subjects(RDF.type, uri_ontouml_class):
         for type_restr in type_restr_list:
@@ -95,7 +95,7 @@ def get_class_name(ontouml_model: Graph, ontouml_class: str) -> str:
     :rtype: str
     """
     uri_ontouml_class = URIRef(ontouml_class)
-    uri_ontouml_name = URIRef(ONTOUML_NAMESPACE + "name")
+    uri_ontouml_name = URIRef(ONTOUML.name)
 
     uri_class_name = ontouml_model.value(uri_ontouml_class, uri_ontouml_name)
     class_name = uri_class_name.toPython()
@@ -114,7 +114,7 @@ def get_class_stereotype(ontouml_model: Graph, ontouml_class: str) -> str | None
     :rtype: str | None
     """
     uri_ontouml_class = URIRef(ontouml_class)
-    uri_ontouml_stereotype = URIRef(ONTOUML_NAMESPACE + "stereotype")
+    uri_ontouml_stereotype = URIRef(ONTOUML.stereotype)
 
     try:
         uri_class_st = ontouml_model.value(uri_ontouml_class, uri_ontouml_stereotype)
