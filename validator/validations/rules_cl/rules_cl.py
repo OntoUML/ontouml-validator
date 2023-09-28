@@ -361,6 +361,6 @@ def execute_rule_R_CL_YOK(ontouml_model: Graph, rule_code: str) -> tuple[list[Re
             f"The non-sortal ('{class_st}') class '{class_name}' " f"has isAbstract attribute set to 'false'."
         )
         issue = ResultIssue(rule_code, rule_definition, issue_description, [class_id])
-        rule_w_list.append(issue)
+        rule_e_list.append(issue)
 
     return rule_w_list, rule_e_list

@@ -45,10 +45,54 @@ ONTOUML_ULTIMATE_SORTALS = [
     "https://w3id.org/ontouml#type",
 ]
 
-# ONTOUML_NON_SORTALS = [
-#     "https://w3id.org/ontouml#category",
-#     "https://w3id.org/ontouml#historicalRoleMixin",
-#     "https://w3id.org/ontouml#mixin",
-#     "https://w3id.org/ontouml#phaseMixin",
-#     "https://w3id.org/ontouml#roleMixin",
-# ]
+ONTOUML_SORTALS = [
+    "https://w3id.org/ontouml#collective",
+    "https://w3id.org/ontouml#historicalRole",
+    "https://w3id.org/ontouml#kind",
+    "https://w3id.org/ontouml#mode",
+    "https://w3id.org/ontouml#phase",
+    "https://w3id.org/ontouml#quality",
+    "https://w3id.org/ontouml#quantity",
+    "https://w3id.org/ontouml#relator",
+    "https://w3id.org/ontouml#role",
+    "https://w3id.org/ontouml#subkind",
+    "https://w3id.org/ontouml#type",
+]
+
+ONTOUML_NON_SORTALS = [
+    "https://w3id.org/ontouml#category",
+    "https://w3id.org/ontouml#historicalRoleMixin",
+    "https://w3id.org/ontouml#mixin",
+    "https://w3id.org/ontouml#phaseMixin",
+    "https://w3id.org/ontouml#roleMixin",
+]
+
+ONTOUML_ST_ABSTRACTS = [
+    "https://w3id.org/ontouml#abstract",
+    "https://w3id.org/ontouml#datatype",
+    "https://w3id.org/ontouml#enumeration",
+]
+
+ONTOUML_ST_RIGIDS = [
+    "https://w3id.org/ontouml#category",
+    "https://w3id.org/ontouml#collective",
+    "https://w3id.org/ontouml#kind",
+    "https://w3id.org/ontouml#mode",
+    "https://w3id.org/ontouml#quality",
+    "https://w3id.org/ontouml#quantity",
+    "https://w3id.org/ontouml#relator",
+    "https://w3id.org/ontouml#subkind",
+]
+
+ONTOUML_ST_ANTI_RIGIDS = [
+    "https://w3id.org/ontouml#historicalRole",
+    "https://w3id.org/ontouml#historicalRoleMixin",
+    "https://w3id.org/ontouml#phase",
+    "https://w3id.org/ontouml#phaseMixin",
+    "https://w3id.org/ontouml#role",
+    "https://w3id.org/ontouml#roleMixin",
+]
+
+ONTOUML_ST_SEMI_RIGIDS = [
+    "https://w3id.org/ontouml#mixin",
+]
