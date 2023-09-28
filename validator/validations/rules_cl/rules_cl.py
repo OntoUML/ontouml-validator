@@ -5,6 +5,7 @@ This module provides a collection of functions for executing OntoUML validations
 from icecream import ic
 from rdflib import Graph
 
+from validator.modules.utils_general import intersection_lists
 from validator.validations.result_issue import ResultIssue
 from validator.validations.rules_cl.sparql_cl import (
     QUERY_R_CL_XJZ,
@@ -21,6 +22,8 @@ from validator.vocab_lib.functions import (
     get_classes_of_types,
     get_class_name,
     get_all_superclasses,
+    get_all_classes,
+    get_all_subclasses,
 )
 from validator.vocab_lib.ontouml import ONTOUML
 from validator.vocab_lib.variables import (
@@ -427,5 +430,48 @@ def execute_rule_R_CL_QJC(ontouml_model: Graph, rule_code: str) -> tuple[list[Re
                 )
                 issue = ResultIssue(rule_code, rule_definition, issue_description, [class_id])
                 rule_e_list.append(issue)
+
+    return rule_w_list, rule_e_list
+
+
+def execute_rule_R_CL_EGT(ontouml_model: Graph, rule_code: str) -> tuple[list[ResultIssue], list[ResultIssue]]:
+    """Execute rule R_CL_EGT and return its description and results.
+
+    :param ontouml_model: The OntoUML model in graph format (using the ontouml-vocabulary)" : "be validated by the rule.
+    :type ontouml_model: Graph
+    :param rule_code: Code of this rule.
+    :type rule_code: str
+    :return: A tuple with two components:
+        - A list of all warnings (as a ResultIssue object) found during the specific rule's validation process.
+        - A list of all errors (as a ResultIssue object) found during the specific rule's validation process.
+    :rtype: tuple[list[ResultIssue], list[ResultIssue]]
+    """
+    rule_definition = "No class can have one of its subclasses as its superclasses."
+
+    rule_w_list = []
+    rule_e_list = []
+
+    all_model_classes = get_all_classes(ontouml_model)
+
+    for model_class in all_model_classes:
+        superclasses = get_all_superclasses(ontouml_model, model_class)
+        subclasses = get_all_subclasses(ontouml_model, model_class)
+        ic(model_class, superclasses, subclasses)
+
+        intersection = intersection_lists(superclasses, subclasses)
+
+        if intersection:
+            intersection_names = []
+            for int_class in intersection:
+                intersection_names.append(get_class_name(ontouml_model, int_class))
+
+            class_name = get_class_name(ontouml_model, model_class)
+
+            issue_description = (
+                f"The class '{class_name}' has the following classes as its subclasses and "
+                f"superclasses: {intersection_names}. "
+            )
+            issue = ResultIssue(rule_code, rule_definition, issue_description, [model_class])
+            rule_e_list.append(issue)
 
     return rule_w_list, rule_e_list
