@@ -173,6 +173,5 @@ class ONTOUML(DefinedNamespace):
     yCoordinate: URIRef  # https://w3id.org/ontouml#yCoordinate
 
     _fail = True
-    _underscore_num = True
 
     _NS = Namespace("https://w3id.org/ontouml#")
