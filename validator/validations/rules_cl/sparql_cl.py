@@ -1,5 +1,5 @@
 """Define all SPARQL queries to be used in rules of the group CL."""
-from validator.vocab_lib.globals import ONTOUML_SPARQL_PREFIX
+from validator.vocab_lib.variables import ONTOUML_SPARQL_PREFIX
 
 QUERY_R_CL_XJZ = (
     ONTOUML_SPARQL_PREFIX
@@ -100,6 +100,19 @@ WHERE {
          ontouml:isAbstract false .
   FILTER (?class_st IN (ontouml:category, ontouml:historicalRoleMixin, ontouml:mixin,
                         ontouml:phaseMixin, ontouml:roleMixin))
+}
+"""
+)
+
+QUERY_TAGGED_VALUE = (
+    ONTOUML_SPARQL_PREFIX
+    + """
+SELECT ?class_id ?class_name ?class_st ?tagged
+WHERE {
+  ?class_id a ontouml:Class ;
+            ontouml:name ?class_name ;
+            ontouml:stereotype ?class_st .
+  OPTIONAL {?class_id ontouml:restrictedTo ?tagged . }
 }
 """
 )

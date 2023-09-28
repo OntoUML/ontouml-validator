@@ -1,5 +1,5 @@
 """Constants to be used globally in the code."""
-from validator.vocab_lib.ONTOUML import ONTOUML
+from validator.vocab_lib.ontouml import ONTOUML
 
 ONTOUML_SPARQL_PREFIX = "PREFIX ontouml: <https://w3id.org/ontouml#> "
 

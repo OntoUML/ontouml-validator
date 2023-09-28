@@ -18,9 +18,10 @@ Example:
 For more information about the OntoUML vocabulary,
 refer to the official documentation at: https://w3id.org/ontouml/vocabulary
 """
-
 from rdflib import URIRef
 from rdflib.namespace import DefinedNamespace, Namespace
+
+ONTOUML_NAMESPACE = "https://w3id.org/ontouml#"
 
 
 class ONTOUML(DefinedNamespace):
@@ -174,4 +175,4 @@ class ONTOUML(DefinedNamespace):
 
     _fail = True
 
-    _NS = Namespace("https://w3id.org/ontouml#")
+    _NS = Namespace(ONTOUML_NAMESPACE)

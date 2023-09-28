@@ -1,7 +1,7 @@
 """Library for manipulating ontouml-vocabulary."""
 from rdflib import Graph, URIRef, RDF
 
-from validator.vocab_lib.ONTOUML import ONTOUML
+from validator.vocab_lib.ontouml import ONTOUML, ONTOUML_NAMESPACE
 
 
 def get_direct_superclasses(ontouml_model: Graph, ontouml_class: str, type_restr_list: list[str] = []) -> list[str]:
@@ -123,3 +123,64 @@ def get_class_stereotype(ontouml_model: Graph, ontouml_class: str) -> str | None
         class_stereotype = None
 
     return class_stereotype
+
+
+def get_ontouml_term(term_name: str) -> (URIRef, str):
+    """
+    Retrieve the URIRef and string representation for a specified term.
+
+    This method provides a convenient way to access both the URIRef and the string representation of a term in
+    the OntoUML vocabulary.
+
+    Example:
+        # Access the URIRef and string representation for 'abstract'
+        abstract_uri, abstract_str = ONTOUML.get_term('abstract')
+
+    :param term_name: The name of the term for which to retrieve information.
+    :type term_name: str
+    :return: A tuple containing the URIRef representing the term and its string representation.
+    :rtype: (URIRef,str)
+
+    """
+    str_term = ONTOUML_NAMESPACE + term_name
+    uri_term = URIRef(term_name)
+
+    return uri_term, str_term
+
+
+def get_ontouml_uri(term_name: str) -> URIRef:
+    """
+    Retrieve the URIRef for a specified OntoUML term.
+
+    This function provides a convenient way to access the URIRef representation of a term in the OntoUML vocabulary.
+
+    Example:
+        # Access the URIRef for 'abstract'
+        abstract_uri = get_ontouml_uri('abstract')
+
+    :param term_name: The name of the term for which to retrieve the URIRef.
+    :type term_name: str
+    :return: The URIRef representing the term.
+    :rtype: URIRef
+    """
+    uri_term, _ = get_ontouml_term(term_name)
+    return uri_term
+
+
+def get_ontouml_str(term_name: str) -> str:
+    """
+    Retrieve the string representation for a specified OntoUML term.
+
+    This function provides a convenient way to access the string representation of a term in the OntoUML vocabulary.
+
+    Example:
+        # Access the string representation for 'abstract'
+        abstract_str = get_ontouml_str('abstract')
+
+    :param term_name: The name of the term for which to retrieve the string representation.
+    :type term_name: str
+    :return: The string representation of the term.
+    :rtype: str
+    """
+    _, str_term = get_ontouml_term(term_name)
+    return str_term

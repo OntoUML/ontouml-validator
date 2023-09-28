@@ -2,6 +2,7 @@
 
 This module provides a collection of functions for executing OntoUML validations for rules of the group CL.
 """
+from icecream import ic
 from rdflib import Graph
 
 from validator.validations.result_issue import ResultIssue
@@ -14,24 +15,25 @@ from validator.validations.rules_cl.sparql_cl import (
     QUERY_R_CL_GJU,
     QUERY_R_CL_BWZ,
     QUERY_R_CL_YOK,
+    QUERY_TAGGED_VALUE,
 )
-from validator.vocab_lib.ONTOUML import ONTOUML
-from validator.vocab_lib.globals import (
-    ONTOUML_CLASS_STEREOTYPES,
-    ONTOUML_ST_BASE_SORTALS,
-    ONTOUML_ST_ULTIMATE_SORTALS,
-)
-from validator.vocab_lib.vocab_lib import (
+from validator.vocab_lib.functions import (
     get_classes_of_types,
     get_class_name,
     get_all_superclasses,
+)
+from validator.vocab_lib.ontouml import ONTOUML
+from validator.vocab_lib.variables import (
+    ONTOUML_CLASS_STEREOTYPES,
+    ONTOUML_ST_BASE_SORTALS,
+    ONTOUML_ST_ULTIMATE_SORTALS,
 )
 
 
 def execute_rule_R_CL_XJZ(ontouml_model: Graph, rule_code: str) -> tuple[list[ResultIssue], list[ResultIssue]]:
     """Execute rule R_CL_XJZ and return its description and results.
 
-    :param ontouml_model: The OntoUML model in graph format (using the ontouml-vocabulary) to be validated by the rule.
+    :param ontouml_model: The OntoUML model in graph format (using the ontouml-vocabulary)" : "be validated by the rule.
     :type ontouml_model: Graph
     :param rule_code: Code of this rule.
     :type rule_code: str
@@ -62,7 +64,7 @@ def execute_rule_R_CL_XJZ(ontouml_model: Graph, rule_code: str) -> tuple[list[Re
 def execute_rule_R_CL_JOJ(ontouml_model: Graph, rule_code: str) -> tuple[list[ResultIssue], list[ResultIssue]]:
     """Execute rule R_CL_JOJ and return its description and results.
 
-    :param ontouml_model: The OntoUML model in graph format (using the ontouml-vocabulary) to be validated by the rule.
+    :param ontouml_model: The OntoUML model in graph format (using the ontouml-vocabulary)" : "be validated by the rule.
     :type ontouml_model: Graph
     :param rule_code: Code of this rule.
     :type rule_code: str
@@ -94,7 +96,7 @@ def execute_rule_R_CL_JOJ(ontouml_model: Graph, rule_code: str) -> tuple[list[Re
         # Class with stereotype different from enumeration and with enumeration literals
         else:
             class_st = row.class_st.toPython()
-            if class_st != (ONTOUML.enumeration):
+            if class_st != (ONTOUML.enumeration.toPython()):
                 issue_description = (
                     f"The class '{class_name}' is stereotyped as '{class_st}' but has enumeration literal(s)."
                 )
@@ -107,7 +109,7 @@ def execute_rule_R_CL_JOJ(ontouml_model: Graph, rule_code: str) -> tuple[list[Re
 def execute_rule_R_CL_UMC(ontouml_model: Graph, rule_code: str) -> tuple[list[ResultIssue], list[ResultIssue]]:
     """Execute rule R_CL_UMC and return its description and results.
 
-    :param ontouml_model: The OntoUML model in graph format (using the ontouml-vocabulary) to be validated by the rule.
+    :param ontouml_model: The OntoUML model in graph format (using the ontouml-vocabulary)" : "be validated by the rule.
     :type ontouml_model: Graph
     :param rule_code: Code of this rule.
     :type rule_code: str
@@ -140,7 +142,7 @@ def execute_rule_R_CL_UMC(ontouml_model: Graph, rule_code: str) -> tuple[list[Re
 def execute_rule_R_CL_AIB(ontouml_model: Graph, rule_code: str) -> tuple[list[ResultIssue], list[ResultIssue]]:
     """Execute rule R_CL_AIB and return its description and results.
 
-    :param ontouml_model: The OntoUML model in graph format (using the ontouml-vocabulary) to be validated by the rule.
+    :param ontouml_model: The OntoUML model in graph format (using the ontouml-vocabulary)" : "be validated by the rule.
     :type ontouml_model: Graph
     :param rule_code: Code of this rule.
     :type rule_code: str
@@ -171,7 +173,7 @@ def execute_rule_R_CL_AIB(ontouml_model: Graph, rule_code: str) -> tuple[list[Re
 def execute_rule_R_CL_EDA(ontouml_model: Graph, rule_code: str) -> tuple[list[ResultIssue], list[ResultIssue]]:
     """Execute rule R_CL_EDA and return its description and results.
 
-    :param ontouml_model: The OntoUML model in graph format (using the ontouml-vocabulary) to be validated by the rule.
+    :param ontouml_model: The OntoUML model in graph format (using the ontouml-vocabulary)" : "be validated by the rule.
     :type ontouml_model: Graph
     :param rule_code: Code of this rule.
     :type rule_code: str
@@ -210,7 +212,7 @@ def execute_rule_R_CL_EDA(ontouml_model: Graph, rule_code: str) -> tuple[list[Re
 def execute_rule_R_CL_ZGT(ontouml_model: Graph, rule_code: str) -> tuple[list[ResultIssue], list[ResultIssue]]:
     """Execute rule R_CL_ZGT and return its description and results.
 
-    :param ontouml_model: The OntoUML model in graph format (using the ontouml-vocabulary) to be validated by the rule.
+    :param ontouml_model: The OntoUML model in graph format (using the ontouml-vocabulary)" : "be validated by the rule.
     :type ontouml_model: Graph
     :param rule_code: Code of this rule.
     :type rule_code: str
@@ -258,7 +260,7 @@ def execute_rule_R_CL_ZGT(ontouml_model: Graph, rule_code: str) -> tuple[list[Re
 def execute_rule_R_CL_GJU(ontouml_model: Graph, rule_code: str) -> tuple[list[ResultIssue], list[ResultIssue]]:
     """Execute rule R_CL_GJU and return its description and results.
 
-    :param ontouml_model: The OntoUML model in graph format (using the ontouml-vocabulary) to be validated by the rule.
+    :param ontouml_model: The OntoUML model in graph format (using the ontouml-vocabulary)" : "be validated by the rule.
     :type ontouml_model: Graph
     :param rule_code: Code of this rule.
     :type rule_code: str
@@ -295,7 +297,7 @@ def execute_rule_R_CL_GJU(ontouml_model: Graph, rule_code: str) -> tuple[list[Re
 def execute_rule_R_CL_BWZ(ontouml_model: Graph, rule_code: str) -> tuple[list[ResultIssue], list[ResultIssue]]:
     """Execute rule R_CL_BWZ and return its description and results.
 
-    :param ontouml_model: The OntoUML model in graph format (using the ontouml-vocabulary) to be validated by the rule.
+    :param ontouml_model: The OntoUML model in graph format (using the ontouml-vocabulary)" : "be validated by the rule.
     :type ontouml_model: Graph
     :param rule_code: Code of this rule.
     :type rule_code: str
@@ -321,13 +323,15 @@ def execute_rule_R_CL_BWZ(ontouml_model: Graph, rule_code: str) -> tuple[list[Re
             issue = ResultIssue(rule_code, rule_definition, issue_description, [class_id])
             rule_w_list.append(issue)
         else:
-            class_st = row.class_st.toPython()
-            if class_st not in ONTOUML_CLASS_STEREOTYPES:
+            if row.class_st not in ONTOUML_CLASS_STEREOTYPES:
                 issue_description = (
-                    f"The class '{class_name}' has stereotype '{class_st}', which is not part of the OntoUML profile."
+                    f"The class '{class_name}' has stereotype '{row.class_st.toPython()}', "
+                    f"which is not part of the OntoUML profile."
                 )
                 issue = ResultIssue(rule_code, rule_definition, issue_description, [class_id])
                 rule_e_list.append(issue)
+
+    ic(len(rule_w_list), len(rule_e_list))
 
     return rule_w_list, rule_e_list
 
@@ -335,7 +339,7 @@ def execute_rule_R_CL_BWZ(ontouml_model: Graph, rule_code: str) -> tuple[list[Re
 def execute_rule_R_CL_YOK(ontouml_model: Graph, rule_code: str) -> tuple[list[ResultIssue], list[ResultIssue]]:
     """Execute rule R_CL_YOK and return its description and results.
 
-    :param ontouml_model: The OntoUML model in graph format (using the ontouml-vocabulary) to be validated by the rule.
+    :param ontouml_model: The OntoUML model in graph format (using the ontouml-vocabulary)" : "be validated by the rule.
     :type ontouml_model: Graph
     :param rule_code: Code of this rule.
     :type rule_code: str
@@ -349,7 +353,7 @@ def execute_rule_R_CL_YOK(ontouml_model: Graph, rule_code: str) -> tuple[list[Re
     rule_w_list = []
     rule_e_list = []
 
-    # Returns every non-sortal class that has its attribute isAbstract set to false
+    # Returns every non-sortal class that has its attribute isAbstract set" : "false
     query_answer = ontouml_model.query(QUERY_R_CL_YOK)
 
     for row in query_answer:
@@ -358,9 +362,70 @@ def execute_rule_R_CL_YOK(ontouml_model: Graph, rule_code: str) -> tuple[list[Re
         class_st = row.class_st.toPython()
 
         issue_description = (
-            f"The non-sortal ('{class_st}') class '{class_name}' " f"has isAbstract attribute set to 'false'."
+            f"The non-sortal ('{class_st}') class '{class_name}' " f"has isAbstract attribute set 'false'."
         )
         issue = ResultIssue(rule_code, rule_definition, issue_description, [class_id])
         rule_e_list.append(issue)
+
+    return rule_w_list, rule_e_list
+
+
+def execute_rule_R_CL_QJC(ontouml_model: Graph, rule_code: str) -> tuple[list[ResultIssue], list[ResultIssue]]:
+    """Execute rule R_CL_QJC and return its description and results.
+
+    :param ontouml_model: The OntoUML model in graph format (using the ontouml-vocabulary)" : "be validated by the rule.
+    :type ontouml_model: Graph
+    :param rule_code: Code of this rule.
+    :type rule_code: str
+    :return: A tuple with two components:
+        - A list of all warnings (as a ResultIssue object) found during the specific rule's validation process.
+        - A list of all errors (as a ResultIssue object) found during the specific rule's validation process.
+    :rtype: tuple[list[ResultIssue], list[ResultIssue]]
+    """
+    rule_definition = (
+        "Each class with one of the following stereotypes must exclusively map to the "
+        "corresponding 'restrictedTo' value: collective to collective, event to event, "
+        "kind to functional-complex, quality to quality, quantity to quantity, "
+        "relator to relator, and situation to situation."
+    )
+
+    rule_w_list = []
+    rule_e_list = []
+
+    # Returns every non-sortal class that has its attribute isAbstract set" : "false
+    query_answer = ontouml_model.query(QUERY_TAGGED_VALUE)
+
+    map_dict = {
+        ONTOUML.collective: ONTOUML.collectiveNature,
+        ONTOUML.event: ONTOUML.eventNature,
+        ONTOUML.kind: ONTOUML.functionalComplexNature,
+        ONTOUML.quality: ONTOUML.qualityNature,
+        ONTOUML.quantity: ONTOUML.quantityNature,
+        ONTOUML.relator: ONTOUML.relatorNature,
+        ONTOUML.situation: ONTOUML.situationNature,
+    }
+
+    for row in query_answer:
+        class_id = row.class_id
+        class_name = row.class_name
+        class_st = row.class_st
+        tagged = row.tagged
+
+        if class_st in map_dict.keys():
+            if tagged is None:
+                issue_description = (
+                    f"The class '{class_name.toPython()}' with stereotype '{class_st.toPython()}' "
+                    f"has no restrictedTo value. "
+                )
+                issue = ResultIssue(rule_code, rule_definition, issue_description, [class_id])
+                rule_w_list.append(issue)
+            elif tagged != map_dict[class_st]:
+                issue_description = (
+                    f"The class '{class_name.toPython()}' with stereotype '{class_st.toPython()}' "
+                    f"has "
+                    f"an incorrect restrictedTo value ('{tagged.toPython()}'). "
+                )
+                issue = ResultIssue(rule_code, rule_definition, issue_description, [class_id])
+                rule_e_list.append(issue)
 
     return rule_w_list, rule_e_list

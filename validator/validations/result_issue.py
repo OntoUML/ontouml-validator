@@ -4,6 +4,7 @@
 class ResultIssue:
     """A class to represent an issue (warning or error) identified by a validation rule."""
 
+    # TODO: Check if it is really necessary to have a list of ids or if just a single id is enought
     def __init__(self, rule_code: str, rule_definition: str, issue_description: str, ids_list: list[str]):
         """Initialize a ResultIssue object.
 
