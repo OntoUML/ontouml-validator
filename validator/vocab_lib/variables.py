@@ -83,3 +83,17 @@ ST_ANTI_RIGIDS = [
 ONTOUML_ST_SEMI_RIGIDS = [
     ONTOUML.mixin,
 ]
+
+ONTOUML_ONTOLOGICAL_NATURES = [
+    ONTOUML.abstractNature,
+    ONTOUML.collectiveNature,
+    ONTOUML.eventNature,
+    ONTOUML.extrinsicModeNature,
+    ONTOUML.functionalComplexNature,
+    ONTOUML.intrinsicModeNature,
+    ONTOUML.qualityNature,
+    ONTOUML.quantityNature,
+    ONTOUML.relatorNature,
+    ONTOUML.situationNature,
+    ONTOUML.typeNature,
+]

@@ -2,7 +2,6 @@
 
 This module provides a collection of functions for executing OntoUML validations for rules of the group CL.
 """
-from icecream import ic
 from rdflib import Graph
 
 from validator.modules.utils_general import intersection_lists
@@ -30,6 +29,7 @@ from validator.vocab_lib.variables import (
     ONTOUML_CLASS_STEREOTYPES,
     ONTOUML_ST_BASE_SORTALS,
     ONTOUML_ST_ULTIMATE_SORTALS,
+    ONTOUML_ONTOLOGICAL_NATURES,
 )
 
 
@@ -334,8 +334,6 @@ def execute_rule_R_CL_BWZ(ontouml_model: Graph, rule_code: str) -> tuple[list[Re
                 issue = ResultIssue(rule_code, rule_definition, issue_description, [class_id])
                 rule_e_list.append(issue)
 
-    ic(len(rule_w_list), len(rule_e_list))
-
     return rule_w_list, rule_e_list
 
 
@@ -395,7 +393,7 @@ def execute_rule_R_CL_QJC(ontouml_model: Graph, rule_code: str) -> tuple[list[Re
     rule_w_list = []
     rule_e_list = []
 
-    # Returns every non-sortal class that has its attribute isAbstract set" : "false
+    # Returns classes and their respective restrictedTo value
     query_answer = ontouml_model.query(QUERY_TAGGED_VALUE)
 
     map_dict = {
@@ -406,6 +404,9 @@ def execute_rule_R_CL_QJC(ontouml_model: Graph, rule_code: str) -> tuple[list[Re
         ONTOUML.quantity: ONTOUML.quantityNature,
         ONTOUML.relator: ONTOUML.relatorNature,
         ONTOUML.situation: ONTOUML.situationNature,
+        ONTOUML.abstract: ONTOUML.abstractNature,
+        ONTOUML.datatype: ONTOUML.abstractNature,
+        ONTOUML.enumeration: ONTOUML.abstractNature,
     }
 
     for row in query_answer:
@@ -415,18 +416,10 @@ def execute_rule_R_CL_QJC(ontouml_model: Graph, rule_code: str) -> tuple[list[Re
         tagged = row.tagged
 
         if class_st in map_dict.keys():
-            if tagged is None:
+            if (tagged is not None) and (tagged != map_dict[class_st]):
                 issue_description = (
                     f"The class '{class_name.toPython()}' with stereotype '{class_st.toPython()}' "
-                    f"has no restrictedTo value. "
-                )
-                issue = ResultIssue(rule_code, rule_definition, issue_description, [class_id])
-                rule_w_list.append(issue)
-            elif tagged != map_dict[class_st]:
-                issue_description = (
-                    f"The class '{class_name.toPython()}' with stereotype '{class_st.toPython()}' "
-                    f"has "
-                    f"an incorrect restrictedTo value ('{tagged.toPython()}'). "
+                    f"has an incorrect restrictedTo value ('{tagged.toPython()}'). "
                 )
                 issue = ResultIssue(rule_code, rule_definition, issue_description, [class_id])
                 rule_e_list.append(issue)
@@ -456,7 +449,6 @@ def execute_rule_R_CL_EGT(ontouml_model: Graph, rule_code: str) -> tuple[list[Re
     for model_class in all_model_classes:
         superclasses = get_all_superclasses(ontouml_model, model_class)
         subclasses = get_all_subclasses(ontouml_model, model_class)
-        ic(model_class, superclasses, subclasses)
 
         intersection = intersection_lists(superclasses, subclasses)
 
@@ -472,6 +464,55 @@ def execute_rule_R_CL_EGT(ontouml_model: Graph, rule_code: str) -> tuple[list[Re
                 f"superclasses: {intersection_names}. "
             )
             issue = ResultIssue(rule_code, rule_definition, issue_description, [model_class])
+            rule_e_list.append(issue)
+
+    return rule_w_list, rule_e_list
+
+
+def execute_rule_R_CL_EMV(ontouml_model: Graph, rule_code: str) -> tuple[list[ResultIssue], list[ResultIssue]]:
+    """Execute rule R_CL_EMV and return its description and results.
+
+    :param ontouml_model: The OntoUML model in graph format (using the ontouml-vocabulary)" : "be validated by the rule.
+    :type ontouml_model: Graph
+    :param rule_code: Code of this rule.
+    :type rule_code: str
+    :return: A tuple with two components:
+        - A list of all warnings (as a ResultIssue object) found during the specific rule's validation process.
+        - A list of all errors (as a ResultIssue object) found during the specific rule's validation process.
+    :rtype: tuple[list[ResultIssue], list[ResultIssue]]
+    """
+    rule_definition = (
+        "Each class with one of the following stereotypes must exclusively map to the "
+        "corresponding 'restrictedTo' value: collective to collective, event to event, "
+        "kind to functional-complex, quality to quality, quantity to quantity, "
+        "relator to relator, and situation to situation."
+    )
+
+    rule_w_list = []
+    rule_e_list = []
+
+    # Returns classes and their respective restrictedTo value
+    query_answer = ontouml_model.query(QUERY_TAGGED_VALUE)
+
+    for row in query_answer:
+        class_id = row.class_id
+        class_name = row.class_name
+        class_st = row.class_st
+        tagged = row.tagged
+
+        if tagged is None:
+            issue_description = (
+                f"The class '{class_name.toPython()}' with stereotype '{class_st.toPython()}' "
+                f"has no restrictedTo value. "
+            )
+            issue = ResultIssue(rule_code, rule_definition, issue_description, [class_id])
+            rule_w_list.append(issue)
+        elif tagged not in ONTOUML_ONTOLOGICAL_NATURES:
+            issue_description = (
+                f"The class '{class_name.toPython()}' with stereotype '{class_st.toPython()}' "
+                f"has an invalid restrictedTo value ('{tagged.toPython()}'). "
+            )
+            issue = ResultIssue(rule_code, rule_definition, issue_description, [class_id])
             rule_e_list.append(issue)
 
     return rule_w_list, rule_e_list

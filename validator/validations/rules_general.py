@@ -21,6 +21,7 @@ from .rules_cl.rules_cl import (
     execute_rule_R_CL_YOK,
     execute_rule_R_CL_QJC,
     execute_rule_R_CL_EGT,
+    execute_rule_R_CL_EMV,
 )
 from ..modules.errors import report_error_end_of_switch
 
@@ -60,6 +61,8 @@ def execute_rule_switch(ontouml_model: Graph, rule_code: str) -> tuple[list[Resu
         rule_w_list, rule_e_list = execute_rule_R_CL_QJC(ontouml_model, rule_code)
     elif rule_code == "R_CL_EGT":
         rule_w_list, rule_e_list = execute_rule_R_CL_EGT(ontouml_model, rule_code)
+    elif rule_code == "R_CL_EMV":
+        rule_w_list, rule_e_list = execute_rule_R_CL_EMV(ontouml_model, rule_code)
     # This situation must never be reached
     else:
         current_function = inspect.stack()[0][3]
