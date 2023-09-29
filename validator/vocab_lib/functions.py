@@ -181,7 +181,7 @@ def get_class_stereotype(ontouml_model: Graph, ontouml_class: str) -> str | None
     :rtype: str | None
     """
     try:
-        uri_class_st = ontouml_model.value(ONTOUML.Class, ONTOUML.stereotype)
+        uri_class_st = ontouml_model.value(URIRef(ontouml_class), ONTOUML.stereotype)
         class_stereotype = uri_class_st.toPython()
     except AttributeError:
         class_stereotype = None

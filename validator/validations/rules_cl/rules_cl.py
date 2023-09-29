@@ -2,6 +2,7 @@
 
 This module provides a collection of functions for executing OntoUML validations for rules of the group CL.
 """
+from icecream import ic
 from rdflib import Graph
 
 from validator.modules.utils_general import intersection_lists
@@ -23,6 +24,7 @@ from validator.vocab_lib.functions import (
     get_all_superclasses,
     get_all_classes,
     get_all_subclasses,
+    get_class_stereotype,
 )
 from validator.vocab_lib.ontouml import ONTOUML
 from validator.vocab_lib.variables import (
@@ -30,6 +32,8 @@ from validator.vocab_lib.variables import (
     ONTOUML_ST_BASE_SORTALS,
     ONTOUML_ST_ULTIMATE_SORTALS,
     ONTOUML_ONTOLOGICAL_NATURES,
+    ONTOUML_ST_SORTALS,
+    ONTOUML_ST_ABSTRACTS,
 )
 
 
@@ -232,14 +236,14 @@ def execute_rule_R_CL_ZGT(ontouml_model: Graph, rule_code: str) -> tuple[list[Re
         if sup_count == 0:
             class_name = get_class_name(ontouml_model, base_sortal)
             issue_description = f"The class '{class_name}' is a base sortal without an ultimate sortal as supertype."
-            issue = ResultIssue(rule_code, issue_description, [base_sortal])
+            issue = ResultIssue(rule_code, issue_description, base_sortal)
             rule_w_list.append(issue)
         elif sup_count > 1:
             class_name = get_class_name(ontouml_model, base_sortal)
             issue_description = (
                 f"The class '{class_name}' is a base sortal with {sup_count} ultimate sortals supertypes."
             )
-            issue = ResultIssue(rule_code, issue_description, [base_sortal])
+            issue = ResultIssue(rule_code, issue_description, base_sortal)
             rule_e_list.append(issue)
 
     return rule_w_list, rule_e_list
@@ -307,7 +311,7 @@ def execute_rule_R_CL_BWZ(ontouml_model: Graph, rule_code: str) -> tuple[list[Re
             issue = ResultIssue(rule_code, issue_description, class_id)
             rule_w_list.append(issue)
         else:
-            if row.class_st not in ONTOUML_CLASS_STEREOTYPES:
+            if row.class_st.toPython() not in ONTOUML_CLASS_STEREOTYPES:
                 issue_description = (
                     f"The class '{class_name}' has stereotype '{row.class_st.toPython()}', "
                     f"which is not part of the OntoUML profile."
@@ -341,9 +345,7 @@ def execute_rule_R_CL_YOK(ontouml_model: Graph, rule_code: str) -> tuple[list[Re
         class_name = row.class_name.toPython()
         class_st = row.class_st.toPython()
 
-        issue_description = (
-            f"The non-sortal ('{class_st}') class '{class_name}' " f"has isAbstract attribute set 'false'."
-        )
+        issue_description = f"The non-sortal ('{class_st}') class '{class_name}' has isAbstract attribute set 'false'."
         issue = ResultIssue(rule_code, issue_description, class_id)
         rule_e_list.append(issue)
 
@@ -433,7 +435,7 @@ def execute_rule_R_CL_EGT(ontouml_model: Graph, rule_code: str) -> tuple[list[Re
                 f"The class '{class_name}' has the following classes as its subclasses and "
                 f"superclasses: {intersection_names}. "
             )
-            issue = ResultIssue(rule_code, issue_description, [model_class])
+            issue = ResultIssue(rule_code, issue_description, model_class)
             rule_e_list.append(issue)
 
     return rule_w_list, rule_e_list
@@ -470,12 +472,57 @@ def execute_rule_R_CL_EMV(ontouml_model: Graph, rule_code: str) -> tuple[list[Re
             )
             issue = ResultIssue(rule_code, issue_description, class_id)
             rule_w_list.append(issue)
-        elif tagged not in ONTOUML_ONTOLOGICAL_NATURES:
+        elif tagged.toPython() not in ONTOUML_ONTOLOGICAL_NATURES:
             issue_description = (
                 f"The class '{class_name.toPython()}' with stereotype '{class_st.toPython()}' "
                 f"has an invalid restrictedTo value ('{tagged.toPython()}'). "
             )
             issue = ResultIssue(rule_code, issue_description, class_id)
             rule_e_list.append(issue)
+
+    return rule_w_list, rule_e_list
+
+
+def execute_rule_R_CL_ALX(ontouml_model: Graph, rule_code: str) -> tuple[list[ResultIssue], list[ResultIssue]]:
+    """Execute rule R_CL_ALX and return its description and results.
+
+    :param ontouml_model: The OntoUML model in graph format (using the ontouml-vocabulary)" : "be validated by the rule.
+    :type ontouml_model: Graph
+    :param rule_code: Code of this rule.
+    :type rule_code: str
+    :return: A tuple with two components:
+        - A list of all warnings (as a ResultIssue object) found during the specific rule's validation process.
+        - A list of all errors (as a ResultIssue object) found during the specific rule's validation process.
+    :rtype: tuple[list[ResultIssue], list[ResultIssue]]
+    """
+    rule_w_list = []
+    rule_e_list = []
+
+    all_ultimate_classes = get_classes_of_types(ontouml_model, ONTOUML_ST_ULTIMATE_SORTALS)
+    ic(all_ultimate_classes)
+
+    for us_class in all_ultimate_classes:
+        class_name = get_class_name(ontouml_model, us_class)
+        class_st = get_class_stereotype(ontouml_model, us_class)
+
+        ic(class_name, class_st)
+
+        superclasses = get_all_superclasses(ontouml_model, us_class)
+
+        for superclass in superclasses:
+            superclass_st = get_class_stereotype(ontouml_model, superclass)
+            ic(superclass, superclass_st)
+            ic(ONTOUML_ST_SORTALS)
+
+            if (superclass_st in ONTOUML_ST_SORTALS) or (superclass_st in ONTOUML_ST_ABSTRACTS):
+                ic("problem found")
+
+                superclass_name = get_class_name(ontouml_model, superclass)
+                issue_description = (
+                    f"The class '{class_name}' with stereotype {class_st} has an invalid specialization with "
+                    f"the class {superclass_name} stereotyped as {superclass_st}."
+                )
+                issue = ResultIssue(rule_code, issue_description, us_class)
+                rule_e_list.append(issue)
 
     return rule_w_list, rule_e_list
