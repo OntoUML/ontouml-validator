@@ -1,7 +1,7 @@
 """Library for manipulating ontouml-vocabulary."""
 from rdflib import Graph, URIRef, RDF
 
-from validator.vocab_lib.ontouml import ONTOUML, ONTOUML_NAMESPACE
+from validator.vocab_lib.ontouml import ONTOUML
 
 
 def get_direct_superclasses(ontouml_model: Graph, ontouml_class: str, type_restr_list: list[str] = []) -> list[str]:
@@ -206,8 +206,8 @@ def get_ontouml_term(term_name: str) -> (URIRef, str):
     :rtype: (URIRef,str)
 
     """
-    str_term = ONTOUML_NAMESPACE + term_name
-    uri_term = URIRef(term_name)
+    uri_term = getattr(ONTOUML, term_name)
+    str_term = str(uri_term)
 
     return uri_term, str_term
 
