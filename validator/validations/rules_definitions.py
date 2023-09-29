@@ -17,10 +17,11 @@ Usage Example:
 
 RULES_DEFINITIONS = {
     "R_CL_AIB": "Enumeration classes cannot be specialized by other classes.",  # noqa: E501
-    "R_CL_ALX": "Every class decorated with a ULTIMATE SORTAL stereotype cannot specialize classes decorated with a SORTAL or an ABSTRACT stereotype.",  # noqa: E501
+    "R_CL_ALX": "Every class decorated with a ULTIMATE SORTAL or a NON-SORTAL stereotype cannot specialize classes decorated with a SORTAL or an ABSTRACT stereotype.",  # noqa: E501
     "R_CL_ANY": "No class representing a powertype (i.e., whose tagged value 'isPowertype' is set to 'true') can be the target of more than one non-derived instantiation relation.",  # noqa: E501
     "R_CL_ASZ": "Every class decorated with a non-sortal stereotype and the tagged value 'order' set to '1' must have the tagged value 'restrictedTo' set to an array containing one or more of the values in the list [ 'functional-complex', 'collective', 'quantity', 'relator', 'intrinsic-mode', 'extrinsic-mode', 'quality' ].",  # noqa: E501
     "R_CL_BFO": "Every class whose tagged value 'restrictedTo' is [ 'collective' ] must have the tagged value 'isExtensional' set to either 'true' or 'false'.",  # noqa: E501
+    "R_CL_BLE": "Every class decorated with a RIGID or SEMI-RIGID stereotype cannot specialize classes decorated with an ANTI-RIGID stereotype.",  # noqa: E501
     "R_CL_BQI": "Every class with the tagged value 'restrictedTo' set to [ 'type' ] must have the have the tagged 'order' set to a number greater than '1'.",  # noqa: E501
     "R_CL_BWZ": "Every class must be decorated with stereotypes of the OntoUML profile.",  # noqa: E501
     "R_CL_CMS": "Every class decorated with a «phase» must be part of a disjoint and complete generalization set including only classes decorated with «phase» as the generalizations' specific classes.",  # noqa: E501

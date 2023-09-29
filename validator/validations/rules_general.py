@@ -10,7 +10,6 @@ from loguru import logger
 from rdflib import Graph
 
 from .result_issue import ResultIssue
-from .rueles_definitions import RULES_DEFINITIONS
 from .rules_cl.rules_cl import (
     execute_rule_R_CL_XJZ,
     execute_rule_R_CL_JOJ,
@@ -26,6 +25,7 @@ from .rules_cl.rules_cl import (
     execute_rule_R_CL_EMV,
     execute_rule_R_CL_ALX,
 )
+from .rules_definitions import RULES_DEFINITIONS
 from ..modules.errors import report_error_end_of_switch
 
 

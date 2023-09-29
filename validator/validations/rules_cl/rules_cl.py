@@ -2,7 +2,6 @@
 
 This module provides a collection of functions for executing OntoUML validations for rules of the group CL.
 """
-from icecream import ic
 from rdflib import Graph
 
 from validator.modules.utils_general import intersection_lists
@@ -34,6 +33,7 @@ from validator.vocab_lib.variables import (
     ONTOUML_ONTOLOGICAL_NATURES,
     ONTOUML_ST_SORTALS,
     ONTOUML_ST_ABSTRACTS,
+    ONTOUML_ST_NON_SORTALS,
 )
 
 
@@ -499,30 +499,25 @@ def execute_rule_R_CL_ALX(ontouml_model: Graph, rule_code: str) -> tuple[list[Re
     rule_e_list = []
 
     all_ultimate_classes = get_classes_of_types(ontouml_model, ONTOUML_ST_ULTIMATE_SORTALS)
-    ic(all_ultimate_classes)
+    all_non_sortal_classes = get_classes_of_types(ontouml_model, ONTOUML_ST_NON_SORTALS)
+    verify_classes = all_ultimate_classes + all_non_sortal_classes
 
-    for us_class in all_ultimate_classes:
-        class_name = get_class_name(ontouml_model, us_class)
-        class_st = get_class_stereotype(ontouml_model, us_class)
+    for ou_class in verify_classes:
+        class_name = get_class_name(ontouml_model, ou_class)
+        class_st = get_class_stereotype(ontouml_model, ou_class)
 
-        ic(class_name, class_st)
-
-        superclasses = get_all_superclasses(ontouml_model, us_class)
+        superclasses = get_all_superclasses(ontouml_model, ou_class)
 
         for superclass in superclasses:
             superclass_st = get_class_stereotype(ontouml_model, superclass)
-            ic(superclass, superclass_st)
-            ic(ONTOUML_ST_SORTALS)
 
             if (superclass_st in ONTOUML_ST_SORTALS) or (superclass_st in ONTOUML_ST_ABSTRACTS):
-                ic("problem found")
-
                 superclass_name = get_class_name(ontouml_model, superclass)
                 issue_description = (
                     f"The class '{class_name}' with stereotype {class_st} has an invalid specialization with "
                     f"the class {superclass_name} stereotyped as {superclass_st}."
                 )
-                issue = ResultIssue(rule_code, issue_description, us_class)
+                issue = ResultIssue(rule_code, issue_description, ou_class)
                 rule_e_list.append(issue)
 
     return rule_w_list, rule_e_list

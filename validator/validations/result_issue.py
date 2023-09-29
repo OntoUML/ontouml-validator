@@ -1,5 +1,5 @@
 """Define the ResultIssue class, which represents issues (warnings or errors) identified by validation rules."""
-from validator.validations.rueles_definitions import RULES_DEFINITIONS
+from validator.validations.rules_definitions import RULES_DEFINITIONS
 
 
 class ResultIssue:
