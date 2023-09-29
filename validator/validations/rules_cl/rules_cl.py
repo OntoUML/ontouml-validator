@@ -45,8 +45,6 @@ def execute_rule_R_CL_XJZ(ontouml_model: Graph, rule_code: str) -> tuple[list[Re
         - A list of all errors (as a ResultIssue object) found during the specific rule's validation process.
     :rtype: tuple[list[ResultIssue], list[ResultIssue]]
     """
-    rule_definition = "Every class decorated with the stereotype 'enumeration' must not have attributes."
-
     rule_w_list = []
     rule_e_list = []
 
@@ -58,7 +56,7 @@ def execute_rule_R_CL_XJZ(ontouml_model: Graph, rule_code: str) -> tuple[list[Re
         class_name = row.class_name.value
 
         issue_description = f"The class '{class_name}' is an enumeration and has attribute(s)."
-        issue = ResultIssue(rule_code, rule_definition, issue_description, [class_id])
+        issue = ResultIssue(rule_code, issue_description, class_id)
         rule_e_list.append(issue)
 
     return rule_w_list, rule_e_list
@@ -76,8 +74,6 @@ def execute_rule_R_CL_JOJ(ontouml_model: Graph, rule_code: str) -> tuple[list[Re
         - A list of all errors (as a ResultIssue object) found during the specific rule's validation process.
     :rtype: tuple[list[ResultIssue], list[ResultIssue]]
     """
-    rule_definition = "Every class having enumeration literals must be decorated with the stereotype enumeration."
-
     rule_w_list = []
     rule_e_list = []
 
@@ -94,7 +90,7 @@ def execute_rule_R_CL_JOJ(ontouml_model: Graph, rule_code: str) -> tuple[list[Re
                 f"The class '{class_name}' without stereotype has an enumeration literal and, hence, "
                 f"must be stereotyped as enumerator."
             )
-            issue = ResultIssue(rule_code, rule_definition, issue_description, [class_id])
+            issue = ResultIssue(rule_code, issue_description, class_id)
             rule_w_list.append(issue)
         # Class with stereotype different from enumeration and with enumeration literals
         else:
@@ -103,7 +99,7 @@ def execute_rule_R_CL_JOJ(ontouml_model: Graph, rule_code: str) -> tuple[list[Re
                 issue_description = (
                     f"The class '{class_name}' is stereotyped as '{class_st}' but has enumeration literal(s)."
                 )
-                issue = ResultIssue(rule_code, rule_definition, issue_description, [class_id])
+                issue = ResultIssue(rule_code, issue_description, class_id)
                 rule_e_list.append(issue)
 
     return rule_w_list, rule_e_list
@@ -121,8 +117,6 @@ def execute_rule_R_CL_UMC(ontouml_model: Graph, rule_code: str) -> tuple[list[Re
         - A list of all errors (as a ResultIssue object) found during the specific rule's validation process.
     :rtype: tuple[list[ResultIssue], list[ResultIssue]]
     """
-    rule_definition = "Every enumeration class must have at least two literals."
-
     rule_w_list = []
     rule_e_list = []
 
@@ -136,7 +130,7 @@ def execute_rule_R_CL_UMC(ontouml_model: Graph, rule_code: str) -> tuple[list[Re
 
         if class_lt < 2:
             issue_description = f"The enumeration class '{class_name}' has less than two literals."
-            issue = ResultIssue(rule_code, rule_definition, issue_description, [class_id])
+            issue = ResultIssue(rule_code, issue_description, class_id)
             rule_w_list.append(issue)
 
     return rule_w_list, rule_e_list
@@ -154,8 +148,6 @@ def execute_rule_R_CL_AIB(ontouml_model: Graph, rule_code: str) -> tuple[list[Re
         - A list of all errors (as a ResultIssue object) found during the specific rule's validation process.
     :rtype: tuple[list[ResultIssue], list[ResultIssue]]
     """
-    rule_definition = "Enumeration classes cannot be specialized by other classes."
-
     rule_w_list = []
     rule_e_list = []
 
@@ -167,7 +159,7 @@ def execute_rule_R_CL_AIB(ontouml_model: Graph, rule_code: str) -> tuple[list[Re
         class_name = row.class_name.value
 
         issue_description = f"The enumeration class '{class_name}' has a specialization relation."
-        issue = ResultIssue(rule_code, rule_definition, issue_description, [class_id])
+        issue = ResultIssue(rule_code, issue_description, class_id)
         rule_e_list.append(issue)
 
     return rule_w_list, rule_e_list
@@ -185,8 +177,6 @@ def execute_rule_R_CL_EDA(ontouml_model: Graph, rule_code: str) -> tuple[list[Re
         - A list of all errors (as a ResultIssue object) found during the specific rule's validation process.
     :rtype: tuple[list[ResultIssue], list[ResultIssue]]
     """
-    rule_definition = "Enumeration classes can only be generalized by classes with stereotype Abstract."
-
     rule_w_list = []
     rule_e_list = []
 
@@ -199,14 +189,14 @@ def execute_rule_R_CL_EDA(ontouml_model: Graph, rule_code: str) -> tuple[list[Re
 
         if row.sup_st is None:
             issue_description = f"The enumeration class '{class_name}' has a generalization class without stereotype."
-            issue = ResultIssue(rule_code, rule_definition, issue_description, [class_id])
+            issue = ResultIssue(rule_code, issue_description, class_id)
             rule_w_list.append(issue)
         else:
             issue_description = (
                 f"The enumeration class '{class_name}' has a generalization class with stereotype "
                 f"different from 'Abstract'."
             )
-            issue = ResultIssue(rule_code, rule_definition, issue_description, [class_id])
+            issue = ResultIssue(rule_code, issue_description, class_id)
             rule_e_list.append(issue)
 
     return rule_w_list, rule_e_list
@@ -224,11 +214,6 @@ def execute_rule_R_CL_ZGT(ontouml_model: Graph, rule_code: str) -> tuple[list[Re
         - A list of all errors (as a ResultIssue object) found during the specific rule's validation process.
     :rtype: tuple[list[ResultIssue], list[ResultIssue]]
     """
-    rule_definition = (
-        "Every class decorated with a base sortal stereotype must specialize a unique class decorated "
-        "with a ultimate sortal stereotype."
-    )
-
     rule_w_list = []
     rule_e_list = []
 
@@ -247,14 +232,14 @@ def execute_rule_R_CL_ZGT(ontouml_model: Graph, rule_code: str) -> tuple[list[Re
         if sup_count == 0:
             class_name = get_class_name(ontouml_model, base_sortal)
             issue_description = f"The class '{class_name}' is a base sortal without an ultimate sortal as supertype."
-            issue = ResultIssue(rule_code, rule_definition, issue_description, [base_sortal])
+            issue = ResultIssue(rule_code, issue_description, [base_sortal])
             rule_w_list.append(issue)
         elif sup_count > 1:
             class_name = get_class_name(ontouml_model, base_sortal)
             issue_description = (
                 f"The class '{class_name}' is a base sortal with {sup_count} ultimate sortals supertypes."
             )
-            issue = ResultIssue(rule_code, rule_definition, issue_description, [base_sortal])
+            issue = ResultIssue(rule_code, issue_description, [base_sortal])
             rule_e_list.append(issue)
 
     return rule_w_list, rule_e_list
@@ -272,8 +257,6 @@ def execute_rule_R_CL_GJU(ontouml_model: Graph, rule_code: str) -> tuple[list[Re
         - A list of all errors (as a ResultIssue object) found during the specific rule's validation process.
     :rtype: tuple[list[ResultIssue], list[ResultIssue]]
     """
-    rule_definition = "Every class must be decorated with exactly one stereotype."
-
     rule_w_list = []
     rule_e_list = []
 
@@ -287,11 +270,11 @@ def execute_rule_R_CL_GJU(ontouml_model: Graph, rule_code: str) -> tuple[list[Re
 
         if class_sts == 0:
             issue_description = f"The class '{class_name}' has no stereotype."
-            issue = ResultIssue(rule_code, rule_definition, issue_description, [class_id])
+            issue = ResultIssue(rule_code, issue_description, class_id)
             rule_w_list.append(issue)
         elif class_sts > 1:
             issue_description = f"The class '{class_name}' has more than one stereotype."
-            issue = ResultIssue(rule_code, rule_definition, issue_description, [class_id])
+            issue = ResultIssue(rule_code, issue_description, class_id)
             rule_e_list.append(issue)
 
     return rule_w_list, rule_e_list
@@ -309,8 +292,6 @@ def execute_rule_R_CL_BWZ(ontouml_model: Graph, rule_code: str) -> tuple[list[Re
         - A list of all errors (as a ResultIssue object) found during the specific rule's validation process.
     :rtype: tuple[list[ResultIssue], list[ResultIssue]]
     """
-    rule_definition = "Every class must be decorated with stereotypes of the OntoUML profile."
-
     rule_w_list = []
     rule_e_list = []
 
@@ -323,7 +304,7 @@ def execute_rule_R_CL_BWZ(ontouml_model: Graph, rule_code: str) -> tuple[list[Re
 
         if row.class_st is None:
             issue_description = f"The class '{class_name}' has no stereotype."
-            issue = ResultIssue(rule_code, rule_definition, issue_description, [class_id])
+            issue = ResultIssue(rule_code, issue_description, class_id)
             rule_w_list.append(issue)
         else:
             if row.class_st not in ONTOUML_CLASS_STEREOTYPES:
@@ -331,7 +312,7 @@ def execute_rule_R_CL_BWZ(ontouml_model: Graph, rule_code: str) -> tuple[list[Re
                     f"The class '{class_name}' has stereotype '{row.class_st.toPython()}', "
                     f"which is not part of the OntoUML profile."
                 )
-                issue = ResultIssue(rule_code, rule_definition, issue_description, [class_id])
+                issue = ResultIssue(rule_code, issue_description, class_id)
                 rule_e_list.append(issue)
 
     return rule_w_list, rule_e_list
@@ -349,8 +330,6 @@ def execute_rule_R_CL_YOK(ontouml_model: Graph, rule_code: str) -> tuple[list[Re
         - A list of all errors (as a ResultIssue object) found during the specific rule's validation process.
     :rtype: tuple[list[ResultIssue], list[ResultIssue]]
     """
-    rule_definition = "Every class decorated with a non-sortal stereotype must be abstract."
-
     rule_w_list = []
     rule_e_list = []
 
@@ -365,7 +344,7 @@ def execute_rule_R_CL_YOK(ontouml_model: Graph, rule_code: str) -> tuple[list[Re
         issue_description = (
             f"The non-sortal ('{class_st}') class '{class_name}' " f"has isAbstract attribute set 'false'."
         )
-        issue = ResultIssue(rule_code, rule_definition, issue_description, [class_id])
+        issue = ResultIssue(rule_code, issue_description, class_id)
         rule_e_list.append(issue)
 
     return rule_w_list, rule_e_list
@@ -383,13 +362,6 @@ def execute_rule_R_CL_QJC(ontouml_model: Graph, rule_code: str) -> tuple[list[Re
         - A list of all errors (as a ResultIssue object) found during the specific rule's validation process.
     :rtype: tuple[list[ResultIssue], list[ResultIssue]]
     """
-    rule_definition = (
-        "Each class with one of the following stereotypes must exclusively map to the "
-        "corresponding 'restrictedTo' value: collective to collective, event to event, "
-        "kind to functional-complex, quality to quality, quantity to quantity, "
-        "relator to relator, and situation to situation."
-    )
-
     rule_w_list = []
     rule_e_list = []
 
@@ -421,7 +393,7 @@ def execute_rule_R_CL_QJC(ontouml_model: Graph, rule_code: str) -> tuple[list[Re
                     f"The class '{class_name.toPython()}' with stereotype '{class_st.toPython()}' "
                     f"has an incorrect restrictedTo value ('{tagged.toPython()}'). "
                 )
-                issue = ResultIssue(rule_code, rule_definition, issue_description, [class_id])
+                issue = ResultIssue(rule_code, issue_description, class_id)
                 rule_e_list.append(issue)
 
     return rule_w_list, rule_e_list
@@ -439,8 +411,6 @@ def execute_rule_R_CL_EGT(ontouml_model: Graph, rule_code: str) -> tuple[list[Re
         - A list of all errors (as a ResultIssue object) found during the specific rule's validation process.
     :rtype: tuple[list[ResultIssue], list[ResultIssue]]
     """
-    rule_definition = "No class can have one of its subclasses as its superclasses."
-
     rule_w_list = []
     rule_e_list = []
 
@@ -463,7 +433,7 @@ def execute_rule_R_CL_EGT(ontouml_model: Graph, rule_code: str) -> tuple[list[Re
                 f"The class '{class_name}' has the following classes as its subclasses and "
                 f"superclasses: {intersection_names}. "
             )
-            issue = ResultIssue(rule_code, rule_definition, issue_description, [model_class])
+            issue = ResultIssue(rule_code, issue_description, [model_class])
             rule_e_list.append(issue)
 
     return rule_w_list, rule_e_list
@@ -481,13 +451,6 @@ def execute_rule_R_CL_EMV(ontouml_model: Graph, rule_code: str) -> tuple[list[Re
         - A list of all errors (as a ResultIssue object) found during the specific rule's validation process.
     :rtype: tuple[list[ResultIssue], list[ResultIssue]]
     """
-    rule_definition = (
-        "Each class with one of the following stereotypes must exclusively map to the "
-        "corresponding 'restrictedTo' value: collective to collective, event to event, "
-        "kind to functional-complex, quality to quality, quantity to quantity, "
-        "relator to relator, and situation to situation."
-    )
-
     rule_w_list = []
     rule_e_list = []
 
@@ -505,14 +468,14 @@ def execute_rule_R_CL_EMV(ontouml_model: Graph, rule_code: str) -> tuple[list[Re
                 f"The class '{class_name.toPython()}' with stereotype '{class_st.toPython()}' "
                 f"has no restrictedTo value. "
             )
-            issue = ResultIssue(rule_code, rule_definition, issue_description, [class_id])
+            issue = ResultIssue(rule_code, issue_description, class_id)
             rule_w_list.append(issue)
         elif tagged not in ONTOUML_ONTOLOGICAL_NATURES:
             issue_description = (
                 f"The class '{class_name.toPython()}' with stereotype '{class_st.toPython()}' "
                 f"has an invalid restrictedTo value ('{tagged.toPython()}'). "
             )
-            issue = ResultIssue(rule_code, rule_definition, issue_description, [class_id])
+            issue = ResultIssue(rule_code, issue_description, class_id)
             rule_e_list.append(issue)
 
     return rule_w_list, rule_e_list

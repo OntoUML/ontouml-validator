@@ -48,4 +48,4 @@ line-length = 120
 paths = ["."]
 exclude = ["docs/", "sphinx/", "venv/",
     "library.py",
-    "validator/modules/errors.py", "validator/vocab_lib"]
+    "validator/modules/errors.py", "validator/vocab_lib", "validator/validations/result_issue.py"]

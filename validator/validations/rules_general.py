@@ -6,9 +6,11 @@ with RDFLib's supported formats and for normalizing and validating world assumpt
 """
 import inspect
 
+from loguru import logger
 from rdflib import Graph
 
 from .result_issue import ResultIssue
+from .rueles_definitions import RULES_DEFINITIONS
 from .rules_cl.rules_cl import (
     execute_rule_R_CL_XJZ,
     execute_rule_R_CL_JOJ,
@@ -39,6 +41,8 @@ def execute_rule_switch(ontouml_model: Graph, rule_code: str) -> tuple[list[Resu
         - A list of all errors found during the specific rule's validation process.
     :rtype: tuple[list[ResultIssue], list[ResultIssue]]
     """
+    logger.debug(f"Executing rule {rule_code}: {RULES_DEFINITIONS[rule_code]}")
+
     if rule_code == "R_CL_GJU":
         rule_w_list, rule_e_list = execute_rule_R_CL_GJU(ontouml_model, rule_code)
     elif rule_code == "R_CL_BWZ":
