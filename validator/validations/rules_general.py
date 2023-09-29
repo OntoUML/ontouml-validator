@@ -89,11 +89,11 @@ def execute_all_validation_rules(ontouml_model: Graph) -> tuple[list[str], list[
     w_list = []
     e_list = []
 
-    validation_rules_list = ["R_CL_GJU"]
+    validation_rules_list = RULES_DEFINITIONS.keys()
 
     for rule_code in validation_rules_list:
         rule_w_list, rule_e_list = execute_rule_switch(ontouml_model, rule_code)
-        w_list.append(rule_w_list)
-        e_list.append(rule_e_list)
+        w_list.extend(rule_w_list)
+        e_list.extend(rule_e_list)
 
     return w_list, e_list

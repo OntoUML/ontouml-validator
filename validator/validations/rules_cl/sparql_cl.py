@@ -30,10 +30,11 @@ WHERE {
 QUERY_R_CL_UMC = (
     ONTOUML_SPARQL_PREFIX
     + """
-SELECT ?class_id ?class_name (count(?class_lt) as ?num_lt)
+SELECT ?class_id ?class_name ?class_st (count(?class_lt) as ?num_lt)
 WHERE {
     ?class_id rdf:type ontouml:Class .
     ?class_id ontouml:name ?class_name .
+    ?class_id ontouml:stereotype ontouml:enumeration .
     OPTIONAL { ?class_id ontouml:literal ?class_lt . }
 } GROUP BY ?class_id """
 )
